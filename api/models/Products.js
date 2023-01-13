@@ -5,6 +5,8 @@ export const productModel='products';
 
 const productSchema = new Schema({
     name: { type: String, required: true },
+    purchasePrice:{type:Number,required:true},
+    recommendedReatilPrice:{type:Number,required:true},
     price: { type: Number, required: true },
     image: { type: String, required: true },
     stock: { type: Number, required: true },
