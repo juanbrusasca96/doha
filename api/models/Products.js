@@ -14,7 +14,8 @@ const productSchema = new Schema({
     stock: { type: Number },
     limitStock: { type: Number },
     category: { type: String, enum: ['Vino', 'Espumante', 'Aperitivo', 'Cerveza', 'Gaseosa', 'Jugo', 'Energizante', 'Vodka', 'Ron', 'Gin', 'Licor', 'Whiskey', 'Tequila', 'Promo', 'Consumo en el local'], required: true },
-    color: { type: String, enum: ['-', 'Tinto', 'Blanco', 'Rosado', 'Rubia', 'Negra', 'Roja'], default: '-' }
+    color: { type: String, enum: ['-', 'Tinto', 'Blanco', 'Rosado', 'Rubia', 'Negra', 'Roja'], default: '-' },
+    idProducts: { Type: Array }
 })
 
 export default productSchema;

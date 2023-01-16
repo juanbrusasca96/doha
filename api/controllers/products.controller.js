@@ -16,7 +16,7 @@ const getProductById = async (req, res) => {
 }
 
 const saveProduct = async (req, res) => {
-    let { name, purchasePrice, recommendedRetailPrice, price, image, stock, limitStock, category,size,unitSize,color } = req.body;
+    let { name, purchasePrice, recommendedRetailPrice, price, image, stock, limitStock, category, size, unitSize, color, idProducts } = req.body;
     if (!name || !price || !image || !category) return res.status(400).send({ status: "error", error: "Imcomplete values" });
     await productService.save({
         name,
@@ -29,7 +29,8 @@ const saveProduct = async (req, res) => {
         stock,
         limitStock,
         category,
-        color
+        color,
+        idProducts
     })
     res.send({ status: "success", message: "Product added" })
 }
