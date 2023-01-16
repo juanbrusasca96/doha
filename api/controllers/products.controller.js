@@ -16,17 +16,20 @@ const getProductById = async (req, res) => {
 }
 
 const saveProduct = async (req, res) => {
-    let { name, purchasePrice, recommendedRetailPrice, price, image, stock, limitStock, category } = req.body;
-    if (!name || !price || !image || !stock || !category) return res.status(400).send({ status: "error", error: "Imcomplete values" });
+    let { name, purchasePrice, recommendedRetailPrice, price, image, stock, limitStock, category,size,unitSize,color } = req.body;
+    if (!name || !price || !image || !category) return res.status(400).send({ status: "error", error: "Imcomplete values" });
     await productService.save({
         name,
         purchasePrice,
         recommendedRetailPrice,
         price,
+        size,
+        unitSize,
         image,
         stock,
         limitStock,
-        category
+        category,
+        color
     })
     res.send({ status: "success", message: "Product added" })
 }
