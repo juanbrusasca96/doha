@@ -8,7 +8,7 @@ export default class Dao {
             process.exit();
         })
         this.models = {
-            productModel: mongoose.model(productModel, productSchema)
+            [productModel]: mongoose.model(productModel, productSchema)
         }
     }
 
