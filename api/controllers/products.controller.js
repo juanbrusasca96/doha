@@ -1,4 +1,4 @@
-import { productService } from "../services/services"
+import { productService } from "../services/services.js"
 
 const getAllProducts = async (req, res) => {
     let products = await productService.getAll();
@@ -16,12 +16,12 @@ const getProductById = async (req, res) => {
 }
 
 const saveProduct = async (req, res) => {
-    let { name, purchasePrice, recommendedReatilPrice, price, image, stock, limitStock, category } = req.body;
+    let { name, purchasePrice, recommendedRetailPrice, price, image, stock, limitStock, category } = req.body;
     if (!name || !price || !image || !stock || !category) return res.status(400).send({ status: "error", error: "Imcomplete values" });
     await productService.save({
         name,
         purchasePrice,
-        recommendedReatilPrice,
+        recommendedRetailPrice,
         price,
         image,
         stock,
