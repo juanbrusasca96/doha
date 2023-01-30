@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import productsRouter from './routes/products.routes.js'
 import usersRouter from './routes/users.routes.js'
+import tablesRouter from './routes/tables.routes.js'
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -15,3 +16,4 @@ app.use(cookieParser());
 
 app.use('/api/products', productsRouter)
 app.use('/api/users', usersRouter)
+app.use('api/tables', tablesRouter)
