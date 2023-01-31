@@ -16,10 +16,10 @@ const getUserById = async (req, res) => {
 }
 
 const saveUser = async (req, res) => {
-    let { username, password } = req.body;
-    if (!username || !password) return res.status(400).send({ status: "error", error: "Imcomplete values" });
+    let { email, password } = req.body;
+    if (!email || !password) return res.status(400).send({ status: "error", error: "Imcomplete values" });
     await userService.save({
-        username,
+        email,
         password
     })
     res.send({ status: "success", message: "User added" })
