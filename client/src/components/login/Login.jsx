@@ -4,17 +4,20 @@ import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { loginUser } from '../../redux/features/users/usersGetSlice';
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [user, setUser] = useState({
         username: '',
         password: ''
     })
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-       dispatch(loginUser(user));
+        await dispatch(loginUser(user));
+        navigate("/home")
     }
     console.log(user);
     return (
