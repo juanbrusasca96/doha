@@ -1,0 +1,11 @@
+.login {
+  height: 100vh;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */
