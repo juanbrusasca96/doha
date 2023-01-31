@@ -1,5 +1,7 @@
-import mongoose from 'mongoose'
+import mongoose, { mongo } from 'mongoose'
 import productSchema, { productModel } from './Products.js'
+import tableSchema, { tableModel } from './Tables.js';
+import userSchema, { userModel } from './Users.js';
 
 export default class Dao {
     constructor(config) {
@@ -8,7 +10,9 @@ export default class Dao {
             process.exit();
         })
         this.models = {
-            [productModel]: mongoose.model(productModel, productSchema)
+            [productModel]: mongoose.model(productModel, productSchema),
+            [userModel]: mongoose.model(userModel, userSchema),
+            [tableModel]: mongoose.model(tableModel, tableSchema),
         }
     }
 
