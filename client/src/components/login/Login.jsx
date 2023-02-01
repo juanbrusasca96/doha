@@ -10,7 +10,7 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [user, setUser] = useState({
-        username: '',
+        userName: '',
         password: ''
     })
 
@@ -19,14 +19,14 @@ export default function Login() {
         await dispatch(loginUser(user));
         navigate("/home")
     }
-    console.log(user);
+
     return (
         <Grid container justifyContent="center" alignItems="center" className='login'>
             <Grid item container justifyContent="center" xs={4}>
                 <form>
-                    <TextField id="outlined-basic" label="Email" type="text" variant="outlined" value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} />
-                    <TextField id="outlined-basic" label="Contraseña" type="password" variant="outlined" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} />
-                    <Button variant="contained" onClick={(e) => handleSubmit(e)}>iniciar sesión</Button>
+                    <TextField id="outlined-basic" label="Nombre de usuario" type="text" variant="outlined" name='userName' value={user.userName} onChange={(e) => setUser({ ...user, userName: e.target.value })} />
+                    <TextField id="outlined-basic" label="Contraseña" type="password" variant="outlined" name='password' value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} />
+                    <Button variant="contained" onClick={(e)=>handleSubmit(e)}>iniciar sesión</Button>
                 </form>
             </Grid>
         </Grid>

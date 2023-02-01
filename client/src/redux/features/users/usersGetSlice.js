@@ -4,8 +4,10 @@ import { loginUserAction } from "./usersSlice";
 
 export const loginUser = (user) => {
     return async (dispatch) => {
-        let response = await axios.post('/api/users', user);
-        console.log(response);
-        dispatch(loginUserAction(response.data))
+        await axios.post('/api/session/register', user);
+        let response = await axios.post('/api/session/login', user)
+        response = response.data.payload.user
+        localStorage.setItem('user', JSON.stringify(response))
+        dispatch(loginUserAction(response))
     }
 }
