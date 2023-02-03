@@ -8,12 +8,14 @@ import logo from './logo.svg';
 import './styles/style.css'
 import Login from './components/login/Login';
 import Home from './components/home/Home';
+import Signup from "./components/signup/Signup";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
