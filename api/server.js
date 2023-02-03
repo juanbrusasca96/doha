@@ -12,7 +12,7 @@ import initializePassport from './config/passport.js';
 const app = express();
 const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
-app.use(cors({ credentials: true, origin: "http://localhost:3001" }))
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
