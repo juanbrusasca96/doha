@@ -11,13 +11,14 @@ const ExtractJwt = jwt.ExtractJwt;
 
 const initializePassport = () => {
     passport.use('register', new LocalStrategy({ passReqToCallback: true, usernameField: 'userName', session: false }, async (req, username, password, done) => {
-        let { userName } = req.body;
+        let { userName, imageURL } = req.body;
         try {
             let user = await userService.getBy({ userName: username })
             if (user) return done(null, false, { message: "User already exists" });
             const newUser = {
                 userName,
-                password: createHash(password)
+                password: createHash(password),
+                imageURL
             }
             let result = await userService.save(newUser);
             return done(null, result);
