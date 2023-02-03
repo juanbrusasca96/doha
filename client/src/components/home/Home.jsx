@@ -11,7 +11,6 @@ export default function Home() {
 
     const checkLogin = async () => {
         const response = await axios.post('/api/session/login', user)
-        console.log(response.data.payload.user);
         if (!response.data.payload.user) logOut()
     }
 
@@ -23,8 +22,6 @@ export default function Home() {
     useEffect(() => {
         checkLogin();
     }, [])
-
-    console.log(user);
 
     return (
         <Grid>
