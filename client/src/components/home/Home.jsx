@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../redux/features/users/usersGetSlice';
+import NavBar from '../navbar/Navbar';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ export default function Home() {
     }
 
     const logOut = () => {
+        console.log('si');
         localStorage.removeItem('user')
         navigate('/')
     }
@@ -28,7 +30,7 @@ export default function Home() {
 
     return (
         <Grid>
-            Home
+            <NavBar logOut={logOut}/>
         </Grid>
     )
 }
