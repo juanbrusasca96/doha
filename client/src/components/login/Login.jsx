@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { loginUser } from '../../redux/features/users/usersGetSlice';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -13,12 +14,24 @@ export default function Login() {
         userName: '',
         password: ''
     })
+    const userLocalStorage = localStorage.getItem('user');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const login = async (user) => {
         await dispatch(loginUser(user));
         navigate("/home")
     }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        login(user)
+    }
+
+    useEffect(() => {
+        if (userLocalStorage) {
+            let user = { userName: userLocalStorage.userName, password: userLocalStorage.password }
+            login(user);
+        }
+    }, [])
 
     return (
         <Grid container justifyContent="center" alignItems="center" className='login'>

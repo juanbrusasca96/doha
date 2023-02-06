@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Grid from '@mui/material/Grid';
 import { Button, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import { signUpUser } from '../../redux/features/users/usersGetSlice';
+import { loginUser, signUpUser } from '../../redux/features/users/usersGetSlice';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -14,12 +14,29 @@ export default function Login() {
         password: '',
         imageURL: ''
     })
+    const userLocalStorage = localStorage.getItem('user');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const login = async (user) => {
+        await dispatch(loginUser(user));
+        navigate("/home")
+    }
+
+    const signUp = async (user) => {
         await dispatch(signUpUser(user));
         navigate("/home")
     }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        signUp(user)
+    }
+
+    useEffect(() => {
+        if (userLocalStorage) {
+            let user = { userName: userLocalStorage.userName, password: userLocalStorage.password }
+            login(user);
+        }
+    }, [])
 
     return (
         <Grid container justifyContent="center" alignItems="center" className='login'>
