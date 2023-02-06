@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { loginUserAction } from "./usersSlice";
+import { loginUserAction, setUserAction } from "./usersSlice";
 
 export const signUpUser = (user) => {
     return async (dispatch) => {
@@ -22,5 +22,11 @@ export const loginUser = (user) => {
             localStorage.setItem('user', JSON.stringify(response))
             dispatch(loginUserAction(user))
         }
+    }
+}
+
+export const setUser = (user) => {
+    return async (dispatch) => {
+        dispatch(setUserAction(user))
     }
 }

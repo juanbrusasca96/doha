@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import { Button, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { loginUser } from '../../redux/features/users/usersGetSlice';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -14,7 +14,7 @@ export default function Login() {
         userName: '',
         password: ''
     })
-    const userLocalStorage = localStorage.getItem('user');
+    const userLocalStorage = JSON.parse(localStorage.getItem('user'));
 
     const login = async (user) => {
         await dispatch(loginUser(user));

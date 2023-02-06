@@ -2,11 +2,13 @@ import { Grid } from '@mui/material'
 import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setUser } from '../../redux/features/users/usersGetSlice';
 
 export default function Home() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('user'))
 
     const checkLogin = async () => {
@@ -21,6 +23,7 @@ export default function Home() {
 
     useEffect(() => {
         checkLogin();
+        dispatch(setUser(user));
     }, [])
 
     return (
