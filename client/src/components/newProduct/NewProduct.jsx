@@ -7,18 +7,27 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import BasicSelect from '../select/BasicSelect';
-import { categories, roundDecimals } from '../../utils/utils.js';
-import { Grid } from '@mui/material';
+import { categories, colors, Promo, roundDecimals, unitSizes } from '../../utils/utils.js';
+import { Avatar, Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { createProduct } from '../../redux/features/products/productsGetSlice';
 
 export default function NewProduct({ open, handleClose }) {
     const [product, setProduct] = React.useState({});
+    const dispatch = useDispatch();
 
-    const handleChangeCategory = (category) => {
-        setProduct({ ...product, category });
+    const handleProduct = (e, key, value) => {
+        if (!!key && !!value) {
+            console.log('si')
+            setProduct({ ...product, [key]: value, [e.target.name]: e.target.value })
+        }
+        else {
+            setProduct({ ...product, [e.target.name]: e.target.value })
+        }
     }
 
-    const handleProduct = (e) => {
-        setProduct({ ...product, [e.target.name]: e.target.value })
+    const handleSubmit = () => {
+        dispatch(createProduct(product))
     }
 
     // React.useEffect(()=>{
@@ -29,23 +38,42 @@ export default function NewProduct({ open, handleClose }) {
         <div>
             <Dialog open={open} onClose={handleClose} fullWidth={true} >
                 <DialogTitle>NUEVO PRODUCTO</DialogTitle>
-                <DialogContent>
-                    <BasicSelect list={categories} value={product.category} handleChangeValue={(category) => handleChangeCategory(category)} />
-                    <TextField autoFocus margin="dense" id="name" name="name" value={product.name} label="Nombre" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} />
-                    <Grid container justifyContent="center">
-                        <Grid container justifyContent="space-between" sx={{ width: '100%' }}>
-                            <TextField autoFocus margin="dense" id="purchasePrice" name="purchasePrice" value={product.purchasePrice} label="Precio de compra" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
-                            <TextField focused margin="dense" id="recommendedRetailPrice" name="recommendedRetailPrice" value={product.purchasePrice && roundDecimals((product.purchasePrice * 1.3), 2)} label="Precio recomendado" type="number" color='warning' variant="standard" onChange={(e) => handleProduct(e)} InputLabelProps={{ shrink: true, }} sx={{ width: '25%' }} />
-                            <TextField autoFocus margin="dense" id="price" name="price" value={product.price} label="Precio de venta" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                <DialogContent >
+                    <Grid container sx={{ gap: '30px' }}>
+                        <BasicSelect list={categories.filter((c) => c !== Promo)} value={product.category} handleChangeValue={(e) => handleProduct(e)} name='category' label='Categoria' minWidth='100%' />
+                        <TextField autoFocus margin="dense" id="name" name="name" value={product.name} label="Nombre" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} />
+                        <Grid container justifyContent="space-between">
+                            <Grid container sx={{ width: '55%' }}>
+                                <TextField autoFocus margin="dense" id="image" name="image" value={product.image} label="URL imagen" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} />
+                            </Grid>
+                            <Grid container justifyContent='center' alignItems='center' sx={{ width: '40%' }}>
+                                <Avatar variant='rounded' src={product.image && product.image} sx={{ width: '6.589vw', height: '6.589vw' }} />
+                            </Grid>
+                        </Grid>
+                        <Grid container justifyContent="center">
+                            <Grid container justifyContent="space-between" sx={{ width: '100%' }}>
+                                <TextField autoFocus margin="dense" id="purchasePrice" name="purchasePrice" value={product.purchasePrice} label="Precio de compra" type="number" variant="standard" onChange={(e)da => handleProduct(e, 'recommendedRetailPrice', roundDecimals(e.target.value * 1.3, 2))} sx={{ width: '25%' }} />
+                                <TextField focused margin="dense" id="recommendedRetailPrice" value={product.purchasePrice && roundDecimals((product.purchasePrice * 1.3), 2)} label="Precio recomendado" type="number" variant="standard" InputLabelProps={{ shrink: true, }} sx={{ width: '25%' }} />
+                                <TextField autoFocus margin="dense" id="price" name="price" value={product.price} label="Precio de venta" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                            </Grid>
+                        </Grid>
+                        <Grid container sx={{ gap: '12.5%' }}>
+                            <TextField autoFocus margin="dense" id="size" name="size" value={product.size} label="Tamaño" type="text" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                            <BasicSelect list={unitSizes} value={product.unitSize} handleChangeValue={(e) => handleProduct(e)} name='unitSize' label='Unidad de tamaño' minWidth='35%' />
+                        </Grid>
+                        <Grid container sx={{ gap: '12.5%' }}>
+                            <TextField autoFocus margin="dense" id="stock" name="stock" value={product.stock} label="Stock" type="text" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                            <TextField autoFocus margin="dense" id="limitStock" name="limitStock" value={product.limitStock} label="Limite de stock" type="text" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                            <BasicSelect list={colors.slice(1)} value={product.color} handleChangeValue={(e) => handleProduct(e)} name='color' label='Color' minWidth='25%' />
+                        </Grid>
+                        <Grid container justifyContent='flex-end'>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Cancelar</Button>
+                                <Button onClick={handleSubmit}>Crear producto</Button>
+                            </DialogActions>
                         </Grid>
                     </Grid>
-
-
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Subscribe</Button>
-                </DialogActions>
             </Dialog>
         </div>
     );
