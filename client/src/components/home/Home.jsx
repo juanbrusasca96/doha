@@ -14,7 +14,7 @@ export default function Home() {
 
     const checkLogin = async () => {
         const response = await axios.post('/api/session/login', user)
-        if (!response.data.payload.user) logOut()
+        if (!response.data.payload) logOut()
     }
 
     const logOut = () => {
