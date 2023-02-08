@@ -27,7 +27,7 @@ router.post('/login', passportCall('login'), (req, res) => {
         httpOnly: true,
         maxAge: 60 * 60 * 1000
     })
-    res.send({ status: "success", payload: { user } })
+    res.send({ status: "success", payload: user })
 })
 
 export default router
