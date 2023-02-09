@@ -63,7 +63,7 @@ export default function NewProduct({ open, handleClose }) {
                         </Grid>
                         <Grid container sx={{ gap: '12.5%' }}>
                             <TextField autoFocus margin="dense" id="size" name="size" value={product.size} label="Tamaño" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
-                            <BasicSelect list={unitSizes} value={product.unitSize} handleChangeValue={(e) => handleProduct(e)} name='unitSize' label='Unidad de tamaño' minWidth='35%' />
+                            <BasicSelect list={unitSizes.slice(1)} value={product.unitSize} handleChangeValue={(e) => handleProduct(e)} name='unitSize' label='Unidad de tamaño' minWidth='35%' />
                         </Grid>
                         <Grid container sx={{ gap: '12.5%' }}>
                             <TextField autoFocus margin="dense" id="stock" name="stock" value={product.stock} label="Stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
