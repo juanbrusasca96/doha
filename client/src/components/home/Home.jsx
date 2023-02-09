@@ -18,7 +18,6 @@ export default function Home() {
     }
 
     const logOut = () => {
-        console.log('si');
         localStorage.removeItem('user')
         navigate('/')
     }
