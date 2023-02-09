@@ -33,7 +33,7 @@ export default class Dao {
         try {
             let instance = new this.models[entity](document);
             let result = await instance.save();
-            return result ? result.toObject : null;
+            return result ? result.toObject() : null;
         } catch (error) {
             console.error(error);
             return null;
