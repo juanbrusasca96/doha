@@ -40,7 +40,7 @@ export default function NewProduct({ open, handleClose }) {
 
     return (
         <div>
-            <Dialog open={open} onClose={handleClose} fullWidth={true} >
+            <Dialog open={open} onClose={handleClose} fullWidth={true} scroll='body'>
                 <DialogTitle>NUEVO PRODUCTO</DialogTitle>
                 <DialogContent >
                     <Grid container sx={{ gap: '30px' }}>
