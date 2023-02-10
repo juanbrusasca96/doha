@@ -3,6 +3,7 @@ import { tableService } from "../services/services.js";
 
 const getAllTables = async (req, res) => {
     let tables = await tableService.getAll();
+    res.send({ status: "success", payload: tables })
 }
 
 const getTableById = async (req, res) => {

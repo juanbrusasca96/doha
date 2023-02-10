@@ -2,6 +2,7 @@ import { userService } from "../services/services.js"
 
 const getAllUsers = async (req, res) => {
     let users = await userService.getAll();
+    res.send({ status: "success", payload: users })
 }
 
 const getUserById = async (req, res) => {
