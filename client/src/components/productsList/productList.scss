@@ -1,0 +1,17 @@
+.table {
+    .tableHead {
+        height: 8vh;
+
+        .columnsTitles {
+            padding: 0;
+            color: white;
+            background-color: $blue;
+            font-weight: bolder;
+        }
+    }
+
+    .rowInfo{
+        font-size: 18px;
+    }
+
+}
