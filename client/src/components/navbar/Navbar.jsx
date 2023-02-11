@@ -20,8 +20,9 @@ const newTable = 'Nueva mesa';
 const newProduct = 'Nuevo producto';
 const newPurchase = 'Nueva compra';
 const statistics = 'Estadisticas';
+const newPromo = 'Nueva promo'
 
-const pages = [newTable, newProduct, newPurchase, statistics];
+const pages = [newTable, newProduct, newPromo, newPurchase, statistics];
 
 export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
