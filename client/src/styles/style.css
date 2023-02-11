@@ -14,4 +14,17 @@
   width: 100%;
 }
 
+.table .tableHead {
+  height: 8vh;
+}
+.table .tableHead .columnsTitles {
+  padding: 0;
+  color: white;
+  background-color: rgb(25, 118, 210);
+  font-weight: bolder;
+}
+.table .rowInfo {
+  font-size: 18px;
+}
+
 /*# sourceMappingURL=style.css.map */
