@@ -8,7 +8,7 @@ import ProductsList from '../productsList/ProductsList'
 
 export default function ProductsContainer() {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.products.allProductsWithStock)
+    const products = useSelector((state) => state.products.allProductsWithStockFilterSearch)
 
     const productsCategories = Array.from(new Set(products.map(prod=>prod.category)))
 

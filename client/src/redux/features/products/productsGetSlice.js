@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { createProductAction, getAllProductsAction, getAllProductsWithStockAction } from "./productsSlice";
+import { createProductAction, getAllProductsAction, getAllProductsWithStockAction, filterSearchBarAction } from "./productsSlice";
 
 export const createProduct = (product) => {
     return async (dispatch) => {
@@ -16,10 +16,15 @@ export const getAllProducts = () => {
     return async (dispatch) => {
         let response = await axios.get('/api/products');
         response = response.data.payload;
-        console.log(response);
         if (response) {
             dispatch(getAllProductsAction(response))
             dispatch(getAllProductsWithStockAction(response.filter(elem => elem.stock > 0)))
         }
+    }
+}
+
+export const productsFilterSearch = (value) => {
+    return (dispatch) => {
+        dispatch(filterSearchBarAction(value))
     }
 }
