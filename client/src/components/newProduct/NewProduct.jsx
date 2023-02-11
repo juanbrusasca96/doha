@@ -10,7 +10,7 @@ import BasicSelect from '../select/BasicSelect';
 import { categories, colors, Promo, roundDecimals, unitSizes } from '../../utils/utils.js';
 import { Avatar, Grid } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { createProduct } from '../../redux/features/products/productsGetSlice';
+import { createProduct, getAllProducts } from '../../redux/features/products/productsGetSlice';
 import Swal from 'sweetalert2'
 
 export default function NewProduct({ open, handleClose }) {
@@ -36,6 +36,7 @@ export default function NewProduct({ open, handleClose }) {
             showConfirmButton: false,
             timer: 1500
         })
+        dispatch(getAllProducts())
     }
 
     return (
