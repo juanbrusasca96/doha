@@ -16,8 +16,9 @@ export default function ProductsList({ products, category }) {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead className='tableHead'>
                     <TableRow>
+                    <TableCell align="center" sx={{ padding: 0}} className='columnsTitles'>{columns[0]}</TableCell>
                         {
-                            columns.map((col, i) => <TableCell key={i} align="center" sx={{ padding: 0 }} className='columnsTitles'>{col}</TableCell>)
+                            columns.slice(1).map((col, i) => <TableCell key={i} align="center" sx={{ width:'9%' }} className='columnsTitles'>{col}</TableCell>)
                         }
                     </TableRow>
                 </TableHead>
