@@ -5,19 +5,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function BasicSelect({ list, value, handleChangeValue, name, label, minWidth }) {
+export default function BasicSelect({ list, value, handleChangeValue, name, label, minWidth, borderColor, color }) {
+    const style={
+        borderBottom:`2px solid ${borderColor}`,
+        ':after':{
+            borderBottom:`1px solid ${borderColor}`
+        }
+    }
 
     return (
         <Box sx={{ minWidth }}>
             <FormControl variant='filled' fullWidth>
-                <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+                <InputLabel id="demo-simple-select-label" sx={{color: borderColor}} color={color}>{label}</InputLabel>
                 <Select
-                    labelId="demo-simple-select-filled-label"
-                    id="demo-simple-select-filled"
+                    labelId="demo-simple-select-error-label"
+                    id="demo-simple-select-error"
                     value={value}
                     label="Age"
                     name={name}
                     onChange={(e) => handleChangeValue(e)}
+                    sx={style}
                 >
                     {
                         list.map((elem) => (
