@@ -1,4 +1,5 @@
 import mongoose, { mongo } from 'mongoose'
+import daySchema, { dayModel } from './Days.js';
 import productSchema, { productModel } from './Products.js'
 import purchaseSchema, { purchaseModel } from './Purchases.js';
 import tableSchema, { tableModel } from './Tables.js';
@@ -14,7 +15,8 @@ export default class Dao {
             [productModel]: mongoose.model(productModel, productSchema),
             [userModel]: mongoose.model(userModel, userSchema),
             [tableModel]: mongoose.model(tableModel, tableSchema),
-            [purchaseModel]:mongoose.model(purchaseModel, purchaseSchema),
+            [purchaseModel]: mongoose.model(purchaseModel, purchaseSchema),
+            [dayModel]: mongoose.model(dayModel, daySchema),
         }
     }
 
