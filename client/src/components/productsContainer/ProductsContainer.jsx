@@ -16,8 +16,6 @@ export default function ProductsContainer() {
         dispatch(getAllProducts())
     }, [])
 
-    console.log(products);
-
     return (
         <Grid sx={{ padding: '2%' }}>
             {
