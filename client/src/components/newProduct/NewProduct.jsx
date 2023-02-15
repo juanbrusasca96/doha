@@ -29,6 +29,7 @@ export default function NewProduct({ open, handleClose }) {
 
     const handleSubmit = () => {
         dispatch(createProduct(product))
+        setProduct({})
         handleClose()
         Swal.fire({
             icon: 'success',
@@ -36,7 +37,10 @@ export default function NewProduct({ open, handleClose }) {
             showConfirmButton: false,
             timer: 1500
         })
-        dispatch(getAllProducts())
+        // dispatch(getAllProducts())
+        setTimeout(() => {
+            window.location.reload(true)
+        }, 1500)
     }
 
     return (
@@ -45,11 +49,11 @@ export default function NewProduct({ open, handleClose }) {
                 <DialogTitle>NUEVO PRODUCTO</DialogTitle>
                 <DialogContent >
                     <Grid container sx={{ gap: '30px' }}>
-                        <BasicSelect list={categories.filter((c) => c !== Promo)} value={product.category} handleChangeValue={(e) => handleProduct(e)} name='category' label='Categoria' minWidth='100%' />
-                        <TextField autoFocus margin="dense" id="name" name="name" value={product.name} label="Nombre" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} />
+                        <BasicSelect list={categories.filter((c) => c !== Promo)} value={product.category} handleChangeValue={(e) => handleProduct(e)} name='category' label='Categoria' minWidth='100%' borderColor='green' color='success' />
+                        <TextField focused margin="dense" id="name" name="name" value={product.name} label="Nombre" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} color='success' />
                         <Grid container justifyContent="space-between">
                             <Grid container sx={{ width: '55%' }}>
-                                <TextField autoFocus margin="dense" id="image" name="image" value={product.image} label="URL imagen" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} />
+                                <TextField focused margin="dense" id="image" name="image" value={product.image} label="URL imagen" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} />
                             </Grid>
                             <Grid container justifyContent='center' alignItems='center' sx={{ width: '40%' }}>
                                 <Avatar variant='rounded' src={product.image && product.image} sx={{ width: '6.589vw', height: '6.589vw' }} />
@@ -57,18 +61,18 @@ export default function NewProduct({ open, handleClose }) {
                         </Grid>
                         <Grid container justifyContent="center">
                             <Grid container justifyContent="space-between" sx={{ width: '100%' }}>
-                                <TextField autoFocus margin="dense" id="purchasePrice" name="purchasePrice" value={product.purchasePrice} label="Precio de compra" type="number" variant="standard" onChange={(e) => handleProduct(e, 'recommendedRetailPrice', roundDecimals(e.target.value * 1.3, 2))} sx={{ width: '25%' }} />
+                                <TextField focused margin="dense" id="purchasePrice" name="purchasePrice" value={product.purchasePrice} label="Precio de compra" type="number" variant="standard" onChange={(e) => handleProduct(e, 'recommendedRetailPrice', roundDecimals(e.target.value * 1.3, 2))} sx={{ width: '25%' }} />
                                 <TextField focused margin="dense" id="recommendedRetailPrice" value={product.purchasePrice && roundDecimals((product.purchasePrice * 1.3), 2)} label="Precio recomendado" type="number" variant="standard" InputLabelProps={{ shrink: true, }} sx={{ width: '25%' }} />
-                                <TextField autoFocus margin="dense" id="price" name="price" value={product.price} label="Precio de venta" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                                <TextField focused margin="dense" id="price" name="price" value={product.price} label="Precio de venta" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} color='success' />
                             </Grid>
                         </Grid>
                         <Grid container sx={{ gap: '12.5%' }}>
-                            <TextField autoFocus margin="dense" id="size" name="size" value={product.size} label="Tamaño" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                            <TextField focused margin="dense" id="size" name="size" value={product.size} label="Tamaño" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
                             <BasicSelect list={unitSizes.slice(1)} value={product.unitSize} handleChangeValue={(e) => handleProduct(e)} name='unitSize' label='Unidad de tamaño' minWidth='35%' />
                         </Grid>
                         <Grid container sx={{ gap: '12.5%' }}>
-                            <TextField autoFocus margin="dense" id="stock" name="stock" value={product.stock} label="Stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
-                            <TextField autoFocus margin="dense" id="limitStock" name="limitStock" value={product.limitStock} label="Limite de stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                            <TextField focused margin="dense" id="stock" name="stock" value={product.stock} label="Stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
+                            <TextField focused margin="dense" id="limitStock" name="limitStock" value={product.limitStock} label="Limite de stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
                             <BasicSelect list={colors.slice(1)} value={product.color} handleChangeValue={(e) => handleProduct(e)} name='color' label='Color' minWidth='25%' />
                         </Grid>
                         <Grid container justifyContent='flex-end'>
