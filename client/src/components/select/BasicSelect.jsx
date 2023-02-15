@@ -7,7 +7,9 @@ import Select from '@mui/material/Select';
 
 export default function BasicSelect({ list, value, handleChangeValue, name, label, minWidth, borderColor, color }) {
     const style={
-        borderBottom:`2px solid ${borderColor}`,
+        ':before':{
+            borderBottom:`2px solid ${borderColor}`
+        },
         ':after':{
             borderBottom:`1px solid ${borderColor}`
         }

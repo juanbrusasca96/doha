@@ -68,12 +68,12 @@ export default function NewProduct({ open, handleClose }) {
                         </Grid>
                         <Grid container sx={{ gap: '12.5%' }}>
                             <TextField focused margin="dense" id="size" name="size" value={product.size} label="Tamaño" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
-                            <BasicSelect list={unitSizes.slice(1)} value={product.unitSize} handleChangeValue={(e) => handleProduct(e)} name='unitSize' label='Unidad de tamaño' minWidth='35%' />
+                            <BasicSelect list={unitSizes.slice(1)} value={product.unitSize} handleChangeValue={(e) => handleProduct(e)} name='unitSize' label='Unidad de tamaño' minWidth='35%' borderColor='rgb(25, 118, 210)' color='primary'/>
                         </Grid>
                         <Grid container sx={{ gap: '12.5%' }}>
                             <TextField focused margin="dense" id="stock" name="stock" value={product.stock} label="Stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
                             <TextField focused margin="dense" id="limitStock" name="limitStock" value={product.limitStock} label="Limite de stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
-                            <BasicSelect list={colors.slice(1)} value={product.color} handleChangeValue={(e) => handleProduct(e)} name='color' label='Color' minWidth='25%' />
+                            <BasicSelect list={colors.slice(1)} value={product.color} handleChangeValue={(e) => handleProduct(e)} name='color' label='Color' minWidth='25%' borderColor='rgb(25, 118, 210)' color='primary'/>
                         </Grid>
                         <Grid container justifyContent='flex-end'>
                             <DialogActions>
