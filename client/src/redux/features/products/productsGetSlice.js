@@ -16,6 +16,7 @@ export const getAllProducts = () => {
     return async (dispatch) => {
         let response = await axios.get('/api/products');
         response = response.data.payload;
+        console.log(response);
         if (response) {
             dispatch(getAllProductsAction(response))
             dispatch(getAllProductsWithStockAction(response.filter(elem => elem.stock > 0)))
