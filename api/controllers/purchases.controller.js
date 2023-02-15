@@ -1,7 +1,5 @@
 import { purchaseService } from "../services/services.js";
 
-
-
 const getAllPurchases = async (req, res) => {
     let purchases = await purchaseService.getAll();
     res.send({ status: "success", payload: purchases })
