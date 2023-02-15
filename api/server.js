@@ -7,6 +7,7 @@ import productsRouter from './routes/products.routes.js'
 import usersRouter from './routes/users.routes.js'
 import tablesRouter from './routes/tables.routes.js'
 import sessionRouter from './routes/session.routes.js'
+import purchasesRouter from './routes/purchases.routes.js'
 import initializePassport from './config/passport.js';
 import helmet from "helmet";
 
@@ -36,6 +37,8 @@ app.use('/api/products', productsRouter)
 app.use('/api/users', usersRouter)
 app.use('api/tables', tablesRouter)
 app.use('/api/session', sessionRouter)
+app.use('/api/session', sessionRouter)
+app.use('/api/purchases', purchasesRouter)
 
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
