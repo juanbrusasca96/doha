@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../../redux/features/products/productsGetSlice'
 import { categories } from '../../utils/utils.js'
-import ProductCard from '../productCard/ProductCard'
+// import ProductCard from '../productCard/ProductCard'
 import ProductsList from '../productsList/ProductsList'
 
 export default function ProductsContainer() {
