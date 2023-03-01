@@ -1,5 +1,6 @@
 import {
   BrowserRouter as Router,
+  Navigate,
   Route,
   Routes
 } from "react-router-dom";
@@ -16,7 +17,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Home />} />
+        <Route index path="/" element={<Home />} />
+        <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </Router>
   );
