@@ -19,7 +19,6 @@ export default function NewProduct({ open, handleClose }) {
 
     const handleProduct = (e, key, value) => {
         if (!!key && !!value) {
-            console.log('si')
             setProduct({ ...product, [key]: value, [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value })
         }
         else {
@@ -38,9 +37,9 @@ export default function NewProduct({ open, handleClose }) {
             timer: 1500
         })
         // dispatch(getAllProducts())
-        setTimeout(() => {
-            window.location.reload(true)
-        }, 1500)
+        // setTimeout(() => {
+        //     window.location.reload(true)
+        // }, 1500)
     }
 
     return (
