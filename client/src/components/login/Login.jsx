@@ -18,7 +18,7 @@ export default function Login() {
 
     const login = async (user) => {
         await dispatch(loginUser(user));
-        navigate("/home")
+        navigate("/")
     }
 
     const handleSubmit = async (e) => {

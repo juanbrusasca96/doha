@@ -18,12 +18,12 @@ export default function Login() {
 
     const login = async (user) => {
         await dispatch(loginUser(user));
-        navigate("/home")
+        navigate("/")
     }
 
     const signUp = async (user) => {
         await dispatch(signUpUser(user));
-        navigate("/home")
+        navigate("/")
     }
 
     const handleSubmit = async (e) => {
@@ -46,7 +46,7 @@ export default function Login() {
                     <TextField id="outlined-basic" label="Contraseña" type="password" variant="outlined" name='password' value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} />
                     <TextField id="outlined-basic" label="Foto de perfil (URL)" type="text" variant="outlined" name='imageURL' value={user.imageURL} onChange={(e) => setUser({ ...user, imageURL: e.target.value })} />
                     <Button variant="contained" onClick={(e) => handleSubmit(e)}>Registrarme</Button>
-                    <Typography>Ya tienes una cuenta? <Link to='/'>Iniciá sesión</Link></Typography>
+                    <Typography>Ya tienes una cuenta? <Link to='/login'>Iniciá sesión</Link></Typography>
                 </form>
             </Grid>
         </Grid>

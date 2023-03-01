@@ -36,10 +36,10 @@ export default function NewProduct({ open, handleClose }) {
             showConfirmButton: false,
             timer: 1500
         })
-        // dispatch(getAllProducts())
-        // setTimeout(() => {
-        //     window.location.reload(true)
-        // }, 1500)
+        dispatch(getAllProducts())
+        setTimeout(() => {
+            window.location.reload(true)
+        }, 1500)
     }
 
     return (
