@@ -16,6 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }))
+app.use(cors({ credentials: true, origin: "https://doha-production.up.railway.app/" }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
