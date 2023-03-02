@@ -94,7 +94,7 @@ export default function NavBar({ logOut }) {
     };
 
     const handleSearchChange = (e) => {
-        dispatch(productsFilterSearch(e.target.value));
+        dispatch(productsFilterSearch(e.target.value.toLowerCase()));
     }
 
     React.useEffect(() => {

@@ -35,8 +35,8 @@ const productSlice = createSlice({
         filterSearchBarAction: (state, action) => {
             return {
                 ...state,
-                allProductsFilterSearch: action.payload ? state.allProducts.filter(elem => elem.name.includes(action.payload)) : state.allProducts,
-                allProductsWithStockFilterSearch: action.payload ? state.allProductsWithStock.filter(elem => elem.name.includes(action.payload)) : state.allProductsWithStock
+                allProductsFilterSearch: action.payload ? state.allProducts.filter(elem => elem.name.toLowerCase().includes(action.payload)) : state.allProducts,
+                allProductsWithStockFilterSearch: action.payload ? state.allProductsWithStock.filter(elem => elem.name.toLowerCase().includes(action.payload)) : state.allProductsWithStock
             }
         },
     }
