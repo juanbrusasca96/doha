@@ -1,7 +1,9 @@
 import { productService } from "../services/services.js"
 
 const getAllProducts = async (req, res) => {
-    let products = await productService.getAll();
+    let sort = req.query.sort;
+    let color = req.query.color;
+    let products = await productService.getAll(sort, color);
     res.send({ status: "success", payload: products })
 }
 
