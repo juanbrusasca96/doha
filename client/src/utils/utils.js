@@ -14,3 +14,7 @@ export function roundDecimals(number, decimals) {
         return Number(number.toFixed(decimals)) === 0 ? 0 : number;  
     }
 }
+
+export function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }

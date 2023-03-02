@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import BasicSelect from '../select/BasicSelect';
-import { categories, colors, Promo, roundDecimals, unitSizes } from '../../utils/utils.js';
+import { capitalizeFirstLetter, categories, colors, Promo, roundDecimals, unitSizes } from '../../utils/utils.js';
 import { Avatar, Grid } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { createProduct, getAllProducts } from '../../redux/features/products/productsGetSlice';
@@ -49,7 +49,7 @@ export default function NewProduct({ open, handleClose }) {
                 <DialogContent >
                     <Grid container sx={{ gap: '30px' }}>
                         <BasicSelect list={categories.filter((c) => c !== Promo)} value={product.category} handleChangeValue={(e) => handleProduct(e)} name='category' label='Categoria' minWidth='100%' borderColor='green' color='success' />
-                        <TextField focused margin="dense" id="name" name="name" value={product.name} label="Nombre" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} color='success' />
+                        <TextField focused margin="dense" id="name" name="name" value={product.name && capitalizeFirstLetter(product.name)} label="Nombre" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} color='success' />
                         <Grid container justifyContent="space-between">
                             <Grid container sx={{ width: '55%' }}>
                                 <TextField focused margin="dense" id="image" name="image" value={product.image} label="URL imagen" type="text" fullWidth variant="standard" onChange={(e) => handleProduct(e)} />
