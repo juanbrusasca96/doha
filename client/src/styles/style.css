@@ -27,4 +27,9 @@
   font-size: 18px;
 }
 
+.productContainer .select {
+  width: 8%;
+  text-align: center;
+}
+
 /*# sourceMappingURL=style.css.map */
