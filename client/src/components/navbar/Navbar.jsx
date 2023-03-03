@@ -71,7 +71,9 @@ export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [open, setOpen] = React.useState({});
+    const [search, setSearch] = React.useState();
     const user = useSelector((state) => state.users.currentUser);
+    const products = useSelector((state) => state.products.allProducts);
     const dispatch = useDispatch();
 
     const handleOpenNavMenu = (event) => {
@@ -94,7 +96,8 @@ export default function NavBar({ logOut }) {
     };
 
     const handleSearchChange = (e) => {
-        dispatch(productsFilterSearch(e.target.value.toLowerCase()));
+        setSearch(e.target.value.toLowerCase());
+
     }
 
     React.useEffect(() => {
@@ -107,6 +110,10 @@ export default function NavBar({ logOut }) {
         })
         setOpen(obj);
     }, [])
+
+    React.useEffect(() => {
+        dispatch(productsFilterSearch(search));
+    }, [search, products])
 
     return (
         <AppBar position="static">
@@ -207,7 +214,7 @@ export default function NavBar({ logOut }) {
                                 <SearchIcon />
                             </SearchIconWrapper>
                             <StyledInputBase
-                                placeholder="Search…"
+                                placeholder="Buscar…"
                                 inputProps={{ 'aria-label': 'search' }}
                                 onChange={(e) => handleSearchChange(e)} />
                         </Search>
