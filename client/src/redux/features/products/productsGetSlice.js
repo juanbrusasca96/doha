@@ -14,7 +14,7 @@ export const createProduct = (product) => {
 
 export const getAllProducts = (options) => {
     return async (dispatch) => {
-        let response = await axios.get(`/api/products?sort=${options?.sort}&color=${options?.filterColor}`);
+        let response = await axios.get(`/api/products?sort=${options?.sort}&color=${options?.color}`);
         response = response.data.payload;
         if (response) {
             dispatch(getAllProductsAction(response))
