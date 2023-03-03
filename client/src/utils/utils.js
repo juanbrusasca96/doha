@@ -6,6 +6,8 @@ export const unitSizes=['-', 'ml', 'L', 'kg'];
 
 export const colors =['-', 'Tinto', 'Blanco', 'Rosado', 'Rubia', 'Negra', 'Roja']
 
+export const sortOptions = ['A - Z', 'Precio']
+
 export function roundDecimals(number, decimals) {
     let numberRegexp = new RegExp('\\d\\.(\\d){' + decimals + ',}');    
     if (numberRegexp.test(number)) {         
