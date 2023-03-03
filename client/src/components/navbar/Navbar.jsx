@@ -9,15 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu.js';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NewProduct from '../newProduct/NewProduct';
-import { alpha, styled, InputBase } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import { productsFilterSearch } from '../../redux/features/products/productsGetSlice';
+import Search from '../search/Search';
 
 const newTable = 'Nueva mesa';
 const newProduct = 'Nuevo producto';
@@ -27,54 +23,11 @@ const newPromo = 'Nueva promo'
 
 const pages = [newTable, newProduct, newPromo, newPurchase, statistics];
 
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
-    },
-}));
-
 export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [open, setOpen] = React.useState({});
-    const [search, setSearch] = React.useState();
     const user = useSelector((state) => state.users.currentUser);
-    const products = useSelector((state) => state.products.allProducts);
-    const dispatch = useDispatch();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -95,11 +48,6 @@ export default function NavBar({ logOut }) {
         setAnchorElUser(null);
     };
 
-    const handleSearchChange = (e) => {
-        setSearch(e.target.value.toLowerCase());
-
-    }
-
     React.useEffect(() => {
         let obj = {}
         pages.map((p) => {
@@ -110,10 +58,6 @@ export default function NavBar({ logOut }) {
         })
         setOpen(obj);
     }, [])
-
-    React.useEffect(() => {
-        dispatch(productsFilterSearch(search));
-    }, [search, products])
 
     return (
         <AppBar position="static">
@@ -208,17 +152,7 @@ export default function NavBar({ logOut }) {
                         ))}
                     </Box>
 
-                    <Box sx={{ width: '30%' }}>
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Buscar…"
-                                inputProps={{ 'aria-label': 'search' }}
-                                onChange={(e) => handleSearchChange(e)} />
-                        </Search>
-                    </Box>
+                    <Search />
 
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
