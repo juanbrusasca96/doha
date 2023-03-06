@@ -9,9 +9,9 @@ import BasicSelect from '../select/BasicSelect'
 
 const colorsOptions = ['Todos', ...colors.slice(1)];
 
-export default function ProductsContainer() {
+export default function ProductsContainer({productsList}) {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.products.allProductsWithStockFilterSearch);
+    const products = useSelector((state) => state.products[productsList]);
     const [sort, setSort] = useState(sortOptions[0]);
     const [color, setColor] = useState(colorsOptions[0]);
     const [options, setOptions] = useState({

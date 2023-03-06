@@ -8,6 +8,14 @@ export const colors =['-', 'Tinto', 'Blanco', 'Rosado', 'Rubia', 'Negra', 'Roja'
 
 export const sortOptions = ['A - Z', 'Precio']
 
+export const newTable = 'Nueva mesa';
+export const newProduct = 'Nuevo producto';
+export const newPurchase = 'Nueva compra';
+export const statistics = 'Estadisticas';
+export const newPromo = 'Nueva promo'
+
+export const pages = [newTable, newProduct, newPromo, newPurchase, statistics];
+
 export function roundDecimals(number, decimals) {
     let numberRegexp = new RegExp('\\d\\.(\\d){' + decimals + ',}');    
     if (numberRegexp.test(number)) {         

@@ -14,14 +14,8 @@ import LocalBarIcon from '@mui/icons-material/LocalBar';
 import { useSelector } from 'react-redux';
 import NewProduct from '../newProduct/NewProduct';
 import Search from '../search/Search';
-
-const newTable = 'Nueva mesa';
-const newProduct = 'Nuevo producto';
-const newPurchase = 'Nueva compra';
-const statistics = 'Estadisticas';
-const newPromo = 'Nueva promo'
-
-const pages = [newTable, newProduct, newPromo, newPurchase, statistics];
+import NewPurchase from '../newPurchase/NewPurchase';
+import { newProduct, newPurchase, pages } from '../../utils/utils';
 
 export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -63,6 +57,7 @@ export default function NavBar({ logOut }) {
         <AppBar position="static">
 
             <NewProduct open={open && open[newProduct]} handleClose={() => handleClose(newProduct)} />
+            <NewPurchase open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} />
 
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
