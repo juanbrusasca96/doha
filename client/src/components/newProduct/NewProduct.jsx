@@ -26,21 +26,32 @@ export default function NewProduct({ open, handleClose }) {
         }
     }
 
-    const handleSubmit = () => {
-        dispatch(createProduct(product))
+    const handleSubmit = async () => {
+        await dispatch(createProduct(product))
         setProduct({})
         handleClose()
+        await dispatch(getAllProducts())
         Swal.fire({
             icon: 'success',
             title: 'Producto creado correctamente',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            customClass: {
+                container: 'my-swal',
+            },
         })
-        dispatch(getAllProducts())
-        setTimeout(() => {
-            window.location.reload(true)
-        }, 1500)
+
+        // setTimeout(() => {
+        //     window.location.reload(true)
+        // }, 1500)
+        var mySwal = document.querySelector('.my-swal');
+        mySwal.style.zIndex = 9999;
+
     }
+
+    const handleWheel = (e) => {
+        e.target.blur();
+    };
 
     return (
         <div>
@@ -60,19 +71,19 @@ export default function NewProduct({ open, handleClose }) {
                         </Grid>
                         <Grid container justifyContent="center">
                             <Grid container justifyContent="space-between" sx={{ width: '100%' }}>
-                                <TextField focused margin="dense" id="purchasePrice" name="purchasePrice" value={product.purchasePrice} label="Precio de compra" type="number" variant="standard" onChange={(e) => handleProduct(e, 'recommendedRetailPrice', roundDecimals(e.target.value * 1.3, 2))} sx={{ width: '25%' }} />
-                                <TextField focused margin="dense" id="recommendedRetailPrice" value={product.purchasePrice && roundDecimals((product.purchasePrice * 1.3), 2)} label="Precio recomendado" type="number" variant="standard" InputLabelProps={{ shrink: true, }} sx={{ width: '25%' }} />
-                                <TextField focused margin="dense" id="price" name="price" value={product.price} label="Precio de venta" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} color='success' />
+                                <TextField focused margin="dense" id="purchasePrice" name="purchasePrice" value={product.purchasePrice} label="Precio de compra" type="number" variant="standard" onChange={(e) => handleProduct(e, 'recommendedRetailPrice', roundDecimals(e.target.value * 1.3, 2))} sx={{ width: '25%' }} onWheel={handleWheel} />
+                                <TextField focused margin="dense" id="recommendedRetailPrice" value={product.purchasePrice && roundDecimals((product.purchasePrice * 1.3), 2)} label="Precio recomendado" type="number" variant="standard" InputLabelProps={{ shrink: true, }} sx={{ width: '25%' }} onWheel={handleWheel} />
+                                <TextField focused margin="dense" id="price" name="price" value={product.price} label="Precio de venta" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} color='success' onWheel={handleWheel} />
                             </Grid>
                         </Grid>
                         <Grid container sx={{ gap: '12.5%' }}>
-                            <TextField focused margin="dense" id="size" name="size" value={product.size} label="Tamaño" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
-                            <BasicSelect list={unitSizes.slice(1)} value={product.unitSize} handleChangeValue={(e) => handleProduct(e)} name='unitSize' label='Unidad de tamaño' minWidth='35%' borderColor='rgb(25, 118, 210)' color='primary'/>
+                            <TextField focused margin="dense" id="size" name="size" value={product.size} label="Tamaño" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} onWheel={handleWheel} />
+                            <BasicSelect list={unitSizes.slice(1)} value={product.unitSize} handleChangeValue={(e) => handleProduct(e)} name='unitSize' label='Unidad de tamaño' minWidth='35%' borderColor='rgb(25, 118, 210)' color='primary' />
                         </Grid>
                         <Grid container sx={{ gap: '12.5%' }}>
-                            <TextField focused margin="dense" id="stock" name="stock" value={product.stock} label="Stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
-                            <TextField focused margin="dense" id="limitStock" name="limitStock" value={product.limitStock} label="Limite de stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} />
-                            <BasicSelect list={colors.slice(1)} value={product.color} handleChangeValue={(e) => handleProduct(e)} name='color' label='Color' minWidth='25%' borderColor='rgb(25, 118, 210)' color='primary'/>
+                            <TextField focused margin="dense" id="stock" name="stock" value={product.stock} label="Stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} onWheel={handleWheel} />
+                            <TextField focused margin="dense" id="limitStock" name="limitStock" value={product.limitStock} label="Limite de stock" type="number" variant="standard" onChange={(e) => handleProduct(e)} sx={{ width: '25%' }} onWheel={handleWheel} />
+                            <BasicSelect list={colors.slice(1)} value={product.color} handleChangeValue={(e) => handleProduct(e)} name='color' label='Color' minWidth='25%' borderColor='rgb(25, 118, 210)' color='primary' />
                         </Grid>
                         <Grid container justifyContent='flex-end'>
                             <DialogActions>
