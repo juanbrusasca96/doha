@@ -147,7 +147,7 @@ export default function NavBar({ logOut }) {
                         ))}
                     </Box>
 
-                    <Search />
+                    <Search width='30%'/>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

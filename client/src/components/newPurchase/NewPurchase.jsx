@@ -41,20 +41,20 @@ export default function NewPurchase({ open, handleClose, handleClickOpen }) {
                             <CloseIcon />
                         </IconButton>
                         <Grid container justifyContent='space-between'>
-                            <Grid container sx={{ width: '90%' }}>
+                            <Grid container sx={{ width: '60%' }}>
                                 <Button autoFocus color="inherit" onClick={() => handleClickOpen(newProduct)}>
                                     Nuevo producto
                                 </Button>
-                                <Search />
+                                <Search width='60%'/>
                             </Grid>
                             <Button autoFocus color="inherit" onClick={handleClose}>
-                                save
+                                Registrar compra
                             </Button>
                         </Grid>
 
                     </Toolbar>
                 </AppBar>
-                <ProductsContainer productsList='allProductsFilterSearch'/>
+                <ProductsContainer productsList='allProductsFilterSearch' home={false}/>
             </Dialog>
         </div>
     );

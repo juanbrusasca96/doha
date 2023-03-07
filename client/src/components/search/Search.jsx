@@ -44,7 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function Search() {
+export default function Search({width}) {
     const [search, setSearch] = React.useState();
     const products = useSelector((state) => state.products.allProducts);
     const dispatch = useDispatch();
@@ -59,7 +59,7 @@ export default function Search() {
     }, [search, products])
 
     return (
-        <Box sx={{ width: '30%' }}>
+        <Box sx={{ width }}>
             <SearchBar>
                 <SearchIconWrapper>
                     <SearchIcon />
