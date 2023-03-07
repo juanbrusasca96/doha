@@ -27,6 +27,10 @@
   font-size: 18px;
 }
 
+.added {
+  padding-top: 2%;
+}
+
 .productContainer .select {
   width: 10%;
   text-align: center;
