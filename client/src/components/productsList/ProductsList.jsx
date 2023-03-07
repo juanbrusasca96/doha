@@ -6,24 +6,28 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Avatar, Grid, Typography } from '@mui/material';
+import { Avatar, Button, Grid, IconButton, Typography } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', 'Stock', 'Precio de compra', 'Precio de venta sugerido']
 
-export default function ProductsList({ products, category }) {
+export default function ProductsList({ products, category, setProductsArray, productsArray, className, home }) {
+
     return (
-        <TableContainer component={Paper} className='table'>
+        <TableContainer component={Paper} className={`table ${className}`}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead className='tableHead'>
                     <TableRow>
-                    <TableCell align="center" sx={{ padding: 0}} className='columnsTitles'>{columns[0]}</TableCell>
+                        <TableCell align="center" sx={{ padding: 0 }} className='columnsTitles'>{columns[0]}</TableCell>
                         {
-                            columns.slice(1).map((col, i) => <TableCell key={i} align="center" sx={{ width:'9%' }} className='columnsTitles'>{col}</TableCell>)
+                            columns.slice(1).map((col, i) => <TableCell key={i} align="center" sx={{ width: '9%' }} className='columnsTitles'>{col}</TableCell>)
                         }
+                        {!home && <TableCell align="center" className='columnsTitles' sx={{ width: '4%' }}></TableCell>}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {products.map((product) => product.category === category &&
+                    {products.map((product) => (product.category === category || category === true) &&
                         <TableRow
                             key={product.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -43,10 +47,9 @@ export default function ProductsList({ products, category }) {
                             <TableCell align="center" className='rowInfo'>{product.stock}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.purchasePrice && product.purchasePrice}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.recommendedRetailPrice && product.recommendedRetailPrice}</TableCell>
+                            {!home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => category === true ? setProductsArray(products.filter((p) => p !== product)) : setProductsArray([...productsArray, product])}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
                         </TableRow>
                     )}
-
-
                 </TableBody>
             </Table>
         </TableContainer>
