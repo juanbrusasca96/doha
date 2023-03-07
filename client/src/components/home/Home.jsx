@@ -31,7 +31,7 @@ export default function Home() {
     return (
         <Grid>
             <NavBar logOut={logOut} />
-            <ProductsContainer productsList='allProductsWithStockFilterSearch'/>
+            <ProductsContainer productsList='allProductsWithStockFilterSearch' home={true} />
         </Grid>
     )
 }

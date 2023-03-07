@@ -9,9 +9,10 @@ import BasicSelect from '../select/BasicSelect'
 
 const colorsOptions = ['Todos', ...colors.slice(1)];
 
-export default function ProductsContainer({productsList}) {
+export default function ProductsContainer({ productsList, home }) {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.products[productsList]);
+    const [productsArray, setProductsArray] = React.useState([])
+    const products = useSelector((state) => state.products[productsList]).filter((product) => !productsArray.includes(product));
     const [sort, setSort] = useState(sortOptions[0]);
     const [color, setColor] = useState(colorsOptions[0]);
     const [options, setOptions] = useState({
@@ -58,7 +59,10 @@ export default function ProductsContainer({productsList}) {
                 <BasicSelect list={colorsOptions} value={color} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='color' label='Filtrar por color' />
             </Grid>
             {
-                categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} /></Grid>))
+                productsArray.length > 0 && <ProductsList products={productsArray} productsArray={[]} setProductsArray={setProductsArray} category={true} className='added' home={home} />
+            }
+            {
+                categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} setProductsArray={setProductsArray} productsArray={productsArray} home={home} /></Grid>))
             }
         </Grid>
     )
