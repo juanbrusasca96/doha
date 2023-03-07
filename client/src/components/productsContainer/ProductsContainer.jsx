@@ -48,7 +48,6 @@ export default function ProductsContainer({productsList}) {
     }
 
     useEffect(() => {
-        console.log(options);
         dispatch(getAllProducts(options))
     }, [options])
 
