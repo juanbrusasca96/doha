@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Grid } from '@mui/material';
-import { newProduct } from '../../utils/utils';
+import { newProduct, Purchase } from '../../utils/utils';
 import Search from '../search/Search';
 import ProductsContainer from '../productsContainer/ProductsContainer';
 
@@ -45,7 +45,7 @@ export default function NewPurchase({ open, handleClose, handleClickOpen }) {
                                 <Button autoFocus color="inherit" onClick={() => handleClickOpen(newProduct)}>
                                     Nuevo producto
                                 </Button>
-                                <Search width='60%'/>
+                                <Search width='60%' />
                             </Grid>
                             <Button autoFocus color="inherit" onClick={handleClose}>
                                 Registrar compra
@@ -54,7 +54,7 @@ export default function NewPurchase({ open, handleClose, handleClickOpen }) {
 
                     </Toolbar>
                 </AppBar>
-                <ProductsContainer productsList='allProductsFilterSearch' home={false}/>
+                <ProductsContainer productsList='allProductsFilterSearch' type={Purchase} />
             </Dialog>
         </div>
     );
