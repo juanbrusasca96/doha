@@ -15,12 +15,23 @@ import { Grid } from '@mui/material';
 import { newProduct, Purchase } from '../../utils/utils';
 import Search from '../search/Search';
 import ProductsContainer from '../productsContainer/ProductsContainer';
+import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function NewPurchase({ open, handleClose, handleClickOpen }) {
+export default function NewRegister({ open, handleClose, handleClickOpen, type }) {
+    const dispatch = useDispatch();
+    const total = useSelector((state) => state.purchases.total)
+
+    const handleClosePurchase = () => {
+        if (type === Purchase) {
+            dispatch(setProductsArray([]))
+        }
+        handleClose()
+    }
 
     return (
         <div>
@@ -35,7 +46,7 @@ export default function NewPurchase({ open, handleClose, handleClickOpen }) {
                         <IconButton
                             edge="start"
                             color="inherit"
-                            onClick={handleClose}
+                            onClick={handleClosePurchase}
                             aria-label="close"
                         >
                             <CloseIcon />
@@ -47,11 +58,16 @@ export default function NewPurchase({ open, handleClose, handleClickOpen }) {
                                 </Button>
                                 <Search width='60%' />
                             </Grid>
+                            <Grid>
+                                <Typography display='flex' alignItems='center' sx={{ height: '100%' }}>
+                                    Valor de la compra: {total}
+                                </Typography>
+                            </Grid>
+
                             <Button autoFocus color="inherit" onClick={handleClose}>
                                 Registrar compra
                             </Button>
                         </Grid>
-
                     </Toolbar>
                 </AppBar>
                 <ProductsContainer productsList='allProductsFilterSearch' type={Purchase} />
