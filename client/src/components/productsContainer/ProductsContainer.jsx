@@ -1,17 +1,19 @@
 import { Grid } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { Calendar } from 'react-calendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../../redux/features/products/productsGetSlice'
-import { categories, colors, sortOptions } from '../../utils/utils.js'
+import { categories, colors, Purchase, sortOptions } from '../../utils/utils.js'
 // import ProductCard from '../productCard/ProductCard'
 import ProductsList from '../productsList/ProductsList'
 import BasicSelect from '../select/BasicSelect'
 
 const colorsOptions = ['Todos', ...colors.slice(1)];
 
-export default function ProductsContainer({ productsList, home }) {
+export default function ProductsContainer({ productsList, type }) {
     const dispatch = useDispatch();
-    const [productsArray, setProductsArray] = React.useState([])
+    const [productsArray, setProductsArray] = React.useState([]);
+    const [day, setDay] = React.useState(new Date());
     const products = useSelector((state) => state.products[productsList]).filter((product) => !productsArray.includes(product));
     const [sort, setSort] = useState(sortOptions[0]);
     const [color, setColor] = useState(colorsOptions[0]);
@@ -57,12 +59,13 @@ export default function ProductsContainer({ productsList, home }) {
             <Grid container sx={{ gap: '2%' }}>
                 <BasicSelect list={sortOptions} value={sort} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='sort' label='Ordenar por' />
                 <BasicSelect list={colorsOptions} value={color} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='color' label='Filtrar por color' />
+                {type === Purchase ? <Calendar onChange={setDay} value={day} /> : ''}
             </Grid>
             {
-                productsArray.length > 0 && <ProductsList products={productsArray} productsArray={[]} setProductsArray={setProductsArray} category={true} className='added' home={home} />
+                productsArray.length > 0 && <ProductsList products={productsArray} productsArray={[]} setProductsArray={setProductsArray} category={true} className='added' type />
             }
             {
-                categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} setProductsArray={setProductsArray} productsArray={productsArray} home={home} /></Grid>))
+                categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} setProductsArray={setProductsArray} productsArray={productsArray} type /></Grid>))
             }
         </Grid>
     )
