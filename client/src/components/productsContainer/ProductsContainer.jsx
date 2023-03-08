@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Calendar } from 'react-calendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../../redux/features/products/productsGetSlice'
+import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice'
 import { categories, colors, Purchase, sortOptions } from '../../utils/utils.js'
 // import ProductCard from '../productCard/ProductCard'
 import ProductsList from '../productsList/ProductsList'
@@ -12,8 +13,8 @@ const colorsOptions = ['Todos', ...colors.slice(1)];
 
 export default function ProductsContainer({ productsList, type }) {
     const dispatch = useDispatch();
-    const [productsArray, setProductsArray] = React.useState([]);
     const [day, setDay] = React.useState(new Date());
+    const productsArray = useSelector((state) => state.purchases.productsArray)
     const products = useSelector((state) => state.products[productsList]).filter((product) => !productsArray.includes(product));
     const [sort, setSort] = useState(sortOptions[0]);
     const [color, setColor] = useState(colorsOptions[0]);
@@ -62,10 +63,10 @@ export default function ProductsContainer({ productsList, type }) {
                 {type === Purchase ? <Calendar onChange={setDay} value={day} /> : ''}
             </Grid>
             {
-                productsArray.length > 0 && <ProductsList products={productsArray} productsArray={[]} setProductsArray={setProductsArray} category={true} className='added' type />
+                productsArray.length > 0 && <ProductsList products={productsArray} category={true} className='added' type />
             }
             {
-                categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} setProductsArray={setProductsArray} productsArray={productsArray} type /></Grid>))
+                categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} type /></Grid>))
             }
         </Grid>
     )

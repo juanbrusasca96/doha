@@ -10,10 +10,14 @@ import { Avatar, Button, Grid, IconButton, Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { Home } from '../../utils/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
 
 const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', 'Stock', 'Precio de compra', 'Precio de venta sugerido']
 
-export default function ProductsList({ products, category, setProductsArray, productsArray, className, type }) {
+export default function ProductsList({ products, category, className, type }) {
+    const dispatch = useDispatch();
+    const productsArray = useSelector((state) => state.purchases.productsArray)
 
     return (
         <TableContainer component={Paper} className={`table ${className}`}>
@@ -48,7 +52,7 @@ export default function ProductsList({ products, category, setProductsArray, pro
                             <TableCell align="center" className='rowInfo'>{product.stock}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.purchasePrice && product.purchasePrice}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.recommendedRetailPrice && product.recommendedRetailPrice}</TableCell>
-                            {type !== Home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => category === true ? setProductsArray(products.filter((p) => p !== product)) : setProductsArray([...productsArray, product])}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
+                            {type !== Home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => category === true ? dispatch(setProductsArray(products.filter((p) => p !== product))) : dispatch(setProductsArray([...productsArray, product]))}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
                         </TableRow>
                     )}
                 </TableBody>
