@@ -9,10 +9,11 @@ import Paper from '@mui/material/Paper';
 import { Avatar, Button, Grid, IconButton, Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { Home } from '../../utils/utils';
 
 const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', 'Stock', 'Precio de compra', 'Precio de venta sugerido']
 
-export default function ProductsList({ products, category, setProductsArray, productsArray, className, home }) {
+export default function ProductsList({ products, category, setProductsArray, productsArray, className, type }) {
 
     return (
         <TableContainer component={Paper} className={`table ${className}`}>
@@ -23,7 +24,7 @@ export default function ProductsList({ products, category, setProductsArray, pro
                         {
                             columns.slice(1).map((col, i) => <TableCell key={i} align="center" sx={{ width: '9%' }} className='columnsTitles'>{col}</TableCell>)
                         }
-                        {!home && <TableCell align="center" className='columnsTitles' sx={{ width: '4%' }}></TableCell>}
+                        {type !== Home && <TableCell align="center" className='columnsTitles' sx={{ width: '4%' }}></TableCell>}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -47,7 +48,7 @@ export default function ProductsList({ products, category, setProductsArray, pro
                             <TableCell align="center" className='rowInfo'>{product.stock}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.purchasePrice && product.purchasePrice}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.recommendedRetailPrice && product.recommendedRetailPrice}</TableCell>
-                            {!home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => category === true ? setProductsArray(products.filter((p) => p !== product)) : setProductsArray([...productsArray, product])}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
+                            {type !== Home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => category === true ? setProductsArray(products.filter((p) => p !== product)) : setProductsArray([...productsArray, product])}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
                         </TableRow>
                     )}
                 </TableBody>
