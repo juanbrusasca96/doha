@@ -1,8 +1,8 @@
 export const Promo = 'Promo'
 
-export const Home = 'Home'
-export const Purchase = 'Purchase'
-export const Table = 'Table'
+export const home = 'home'
+export const purchase = 'purchase'
+export const table = 'table'
 
 export const categories = ['Vino', 'Espumante', 'Aperitivo', 'Cerveza', 'Gaseosa', 'Jugo', 'Energizante', 'Vodka', 'Ron', 'Gin', 'Licor', 'Whiskey', 'Tequila', Promo, 'Consumo en el local'];
 
