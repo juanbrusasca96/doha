@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import NewProduct from '../newProduct/NewProduct';
 import Search from '../search/Search';
 import NewRegister from '../newRegister/NewRegister';
-import { newProduct, newPurchase, pages, Purchase } from '../../utils/utils';
+import { newProduct, newPurchase, pages, purchase } from '../../utils/utils';
 
 export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -57,7 +57,7 @@ export default function NavBar({ logOut }) {
         <AppBar position="static">
 
             <NewProduct open={open && open[newProduct]} handleClose={() => handleClose(newProduct)} />
-            <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={Purchase} />
+            <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} />
 
             <Container maxWidth="xl">
                 <Toolbar disableGutters>

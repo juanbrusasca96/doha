@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Grid } from '@mui/material';
-import { newProduct, Purchase } from '../../utils/utils';
+import { newProduct, purchase } from '../../utils/utils';
 import Search from '../search/Search';
 import ProductsContainer from '../productsContainer/ProductsContainer';
 import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
@@ -27,7 +27,7 @@ export default function NewRegister({ open, handleClose, handleClickOpen, type }
     const total = useSelector((state) => state.purchases.total)
 
     const handleClosePurchase = () => {
-        if (type === Purchase) {
+        if (type === purchase) {
             dispatch(setProductsArray([]))
         }
         handleClose()
@@ -70,7 +70,7 @@ export default function NewRegister({ open, handleClose, handleClickOpen, type }
                         </Grid>
                     </Toolbar>
                 </AppBar>
-                <ProductsContainer productsList='allProductsFilterSearch' type={Purchase} />
+                <ProductsContainer productsList='allProductsFilterSearch' type={purchase} />
             </Dialog>
         </div>
     );

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../redux/features/users/usersGetSlice';
 import NavBar from '../navbar/Navbar';
 import ProductsContainer from '../productsContainer/ProductsContainer';
+import { home } from '../../utils/utils';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function Home() {
     return (
         <Grid>
             <NavBar logOut={logOut} />
-            <ProductsContainer productsList='allProductsWithStockFilterSearch' home={true} />
+            <ProductsContainer productsList='allProductsWithStockFilterSearch' type={home} />
         </Grid>
     )
 }
