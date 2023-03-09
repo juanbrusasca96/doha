@@ -4,7 +4,7 @@ import { Calendar } from 'react-calendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../../redux/features/products/productsGetSlice'
 import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice'
-import { categories, colors, Purchase, sortOptions } from '../../utils/utils.js'
+import { categories, colors, purchase, sortOptions } from '../../utils/utils.js'
 // import ProductCard from '../productCard/ProductCard'
 import ProductsList from '../productsList/ProductsList'
 import BasicSelect from '../select/BasicSelect'
@@ -15,7 +15,7 @@ export default function ProductsContainer({ productsList, type }) {
     const dispatch = useDispatch();
     const [day, setDay] = React.useState(new Date());
     const productsArray = useSelector((state) => state.purchases.productsArray)
-    const products = useSelector((state) => state.products[productsList]).filter((product) => !productsArray.includes(product));
+    const products = useSelector((state) => state.products[productsList]).filter((product) => !productsArray.find(prod => prod._id === product._id));
     const [sort, setSort] = useState(sortOptions[0]);
     const [color, setColor] = useState(colorsOptions[0]);
     const [options, setOptions] = useState({
@@ -60,13 +60,13 @@ export default function ProductsContainer({ productsList, type }) {
             <Grid container sx={{ gap: '2%' }}>
                 <BasicSelect list={sortOptions} value={sort} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='sort' label='Ordenar por' />
                 <BasicSelect list={colorsOptions} value={color} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='color' label='Filtrar por color' />
-                {type === Purchase ? <Calendar onChange={setDay} value={day} /> : ''}
+                {type === purchase ? <Calendar onChange={setDay} value={day} /> : ''}
             </Grid>
             {
-                productsArray.length > 0 && <ProductsList products={productsArray} category={true} className='added' type />
+                productsArray.length > 0 && <ProductsList products={productsArray} category={true} className='added' type={type} />
             }
             {
-                categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} type /></Grid>))
+                categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} type={type} /></Grid>))
             }
         </Grid>
     )
