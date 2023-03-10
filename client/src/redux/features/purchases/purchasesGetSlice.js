@@ -4,7 +4,7 @@ import { setCopyProductsArrayAction, setProductsArrayAction, setTotalAction } fr
 export const setProductsArray = (array) => {
     return (dispatch) => {
         dispatch(setProductsArrayAction(array))
-        dispatch(setTotalAction(array.reduce((acum, elem) => acum + elem.purchasePrice, 0)))
+        dispatch(setTotalAction(array.reduce((acum, elem) => acum + elem.purchasePrice*elem.stock, 0)))
     }
 }
 
