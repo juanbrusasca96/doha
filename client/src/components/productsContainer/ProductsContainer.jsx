@@ -56,7 +56,7 @@ export default function ProductsContainer({ productsList, type }) {
     }, [options])
 
     return (
-        <Grid sx={{ padding: '2%' }} className='productContainer'>
+        <Grid sx={{ padding: '1%' }} className='productContainer'>
             <Grid container sx={{ gap: '2%' }}>
                 <BasicSelect list={sortOptions} value={sort} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='sort' label='Ordenar por' />
                 <BasicSelect list={colorsOptions} value={color} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='color' label='Filtrar por color' />
