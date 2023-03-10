@@ -34,7 +34,7 @@ export default function ProductsList({ products, category, className, type }) {
     const handleChange = (product, e) => {
         let index = productsArray.indexOf(product)
         let newArray = [...productsArray]
-        newArray[index] = { ...product, [e.target.name]: parseInt(e.target.value) }
+        newArray[index] = { ...product, [e.target.name]: parseFloat(e.target.value) }
         dispatch(setProductsArray(newArray))
     }
 
