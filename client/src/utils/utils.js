@@ -32,3 +32,7 @@ export function roundDecimals(number, decimals) {
 export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
+
+export const handleWheel = (e) => {
+    e.target.blur();
+};

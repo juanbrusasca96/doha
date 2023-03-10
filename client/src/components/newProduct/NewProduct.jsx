@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import BasicSelect from '../select/BasicSelect';
-import { capitalizeFirstLetter, categories, colors, Promo, roundDecimals, unitSizes } from '../../utils/utils.js';
+import { capitalizeFirstLetter, categories, colors, handleWheel, Promo, roundDecimals, unitSizes } from '../../utils/utils.js';
 import { Avatar, Grid } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { createProduct, getAllProducts } from '../../redux/features/products/productsGetSlice';
@@ -48,10 +48,6 @@ export default function NewProduct({ open, handleClose }) {
         mySwal.style.zIndex = 9999;
 
     }
-
-    const handleWheel = (e) => {
-        e.target.blur();
-    };
 
     return (
         <div>
