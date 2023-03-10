@@ -11,20 +11,30 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { home, roundDecimals } from '../../utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
+import { setCopyProductsArray, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
 
 
 
 export default function ProductsList({ products, category, className, type }) {
     const dispatch = useDispatch();
     const productsArray = useSelector((state) => state.purchases.productsArray)
+    const copyProductsArray = useSelector((state) => state.purchases.copyProductsArray)
     const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', category === true ? 'Cantidad comprada' : 'Stock', 'Precio de compra', 'Precio de venta sugerido']
 
+    const handleAdd = (product) => {
+        if (category===true) {
+            dispatch(setProductsArray(products.filter((p) => p !== product)))
+        }
+        else {
+            dispatch(setProductsArray([...productsArray, product]))
+            dispatch(setCopyProductsArray(product))
+        }
+    }
+        console.log(copyProductsArray);
     const handleChange = (product, e) => {
         let index = productsArray.indexOf(product)
         let newArray = [...productsArray]
         newArray[index] = { ...product, [e.target.name]: e.target.value }
-        
         dispatch(setProductsArray(newArray))
     }
 
@@ -57,11 +67,11 @@ export default function ProductsList({ products, category, className, type }) {
                             </TableCell>
                             <TableCell align="center" className='rowInfo'>{product.color}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.size && product.size}{product.unitSize}</TableCell>
-                            <TableCell align="center" className='rowInfo' sx={{ fontWeight: 'bolder' }}>{category === true ? <TextField type='number' name='price' label={product.price} onChange={(e) => handleChange(product, e)} /> : product.price}</TableCell>
+                            <TableCell align="center" className='rowInfo' sx={{ fontWeight: 'bolder' }}>{category === true ? <TextField type='number' name='price' label={copyProductsArray.find(p=>p._id===product._id).price} onChange={(e) => handleChange(product, e)} /> : product.price}</TableCell>
                             <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='stock' onChange={(e) => handleChange(product, e)} /> : product.stock}</TableCell>
-                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='purchasePrice' label={product.purchasePrice} onChange={(e) => handleChange(product, e)} /> : product.purchasePrice && product.purchasePrice}</TableCell>
+                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='purchasePrice' label={copyProductsArray.find(p=>p._id===product._id).purchasePrice} onChange={(e) => handleChange(product, e)} /> : product.purchasePrice && product.purchasePrice}</TableCell>
                             <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='recommendedRetailPrice' value={roundDecimals(product.purchasePrice * 1.3, 2)} onChange={(e) => handleChange(product, e)} /> : product.recommendedRetailPrice && product.recommendedRetailPrice}</TableCell>
-                            {type !== home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => category === true ? dispatch(setProductsArray(products.filter((p) => p !== product))) : dispatch(setProductsArray([...productsArray, product]))}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
+                            {type !== home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={()=>handleAdd(product)}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
                         </TableRow>
                     )}
                 </TableBody>

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     productsArray: [],
-    total:0
+    copyProductsArray: [],
+    total: 0
 }
 
 const purchaseSlice = createSlice({
@@ -15,14 +16,20 @@ const purchaseSlice = createSlice({
                 productsArray: action.payload
             }
         },
-        setTotal: (state, action) => {
+        setTotalAction: (state, action) => {
             return {
                 ...state,
                 total: action.payload
+            }
+        },
+        setCopyProductsArrayAction: (state, action) => {
+            return {
+                ...state,
+                copyProductsArray: [...state.copyProductsArray, action.payload]
             }
         }
     }
 })
 
-export const { setProductsArrayAction, setTotal } = purchaseSlice.actions;
+export const { setProductsArrayAction, setTotalAction, setCopyProductsArrayAction } = purchaseSlice.actions;
 export default purchaseSlice.reducer;

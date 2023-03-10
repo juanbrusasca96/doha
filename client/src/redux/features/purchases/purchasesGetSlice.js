@@ -1,9 +1,15 @@
 import axios from "axios";
-import { setProductsArrayAction, setTotal } from "./purchasesSlice";
+import { setCopyProductsArrayAction, setProductsArrayAction, setTotalAction } from "./purchasesSlice";
 
 export const setProductsArray = (array) => {
-    return async (dispatch) => {
+    return (dispatch) => {
         dispatch(setProductsArrayAction(array))
-        dispatch(setTotal(array.reduce((acum, elem) => acum + elem.purchasePrice, 0)))
+        dispatch(setTotalAction(array.reduce((acum, elem) => acum + elem.purchasePrice, 0)))
+    }
+}
+
+export const setCopyProductsArray = (product) => {
+    return (dispatch) => {
+        dispatch(setCopyProductsArrayAction(product))
     }
 }
