@@ -30,15 +30,13 @@ export default function ProductsList({ products, category, className, type }) {
             dispatch(setCopyProductsArray(product))
         }
     }
-        console.log(copyProductsArray);
+
     const handleChange = (product, e) => {
         let index = productsArray.indexOf(product)
         let newArray = [...productsArray]
-        newArray[index] = { ...product, [e.target.name]: e.target.value }
+        newArray[index] = { ...product, [e.target.name]: parseInt(e.target.value) }
         dispatch(setProductsArray(newArray))
     }
-
-    // console.log(productsArray);
 
     return (
         <TableContainer component={Paper} className={`table ${className}`}>
