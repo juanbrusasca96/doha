@@ -57,7 +57,7 @@ export default function NavBar({ logOut }) {
         <AppBar position="static">
 
             <NewProduct open={open && open[newProduct]} handleClose={() => handleClose(newProduct)} />
-            <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} />
+            <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} productsList='allProductsFilterSearch' />
 
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
