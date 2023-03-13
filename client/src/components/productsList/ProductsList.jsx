@@ -22,7 +22,7 @@ export default function ProductsList({ products, category, className, type }) {
     const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', category === true ? 'Cantidad comprada' : 'Stock', 'Precio de compra', 'Precio de venta sugerido']
 
     const handleAdd = (product) => {
-        if (category===true) {
+        if (category === true) {
             dispatch(setProductsArray(products.filter((p) => p !== product)))
         }
         else {
@@ -34,7 +34,12 @@ export default function ProductsList({ products, category, className, type }) {
     const handleChange = (product, e) => {
         let index = productsArray.indexOf(product)
         let newArray = [...productsArray]
-        newArray[index] = { ...product, [e.target.name]: parseFloat(e.target.value) }
+        if (e.target.name === 'purchasePrice') {
+            newArray[index] = { ...product, [e.target.name]: parseFloat(e.target.value), recommendedRetailPrice: roundDecimals(parseFloat(e.target.value) * 1.3, 2) }
+        }
+        else {
+            newArray[index] = { ...product, [e.target.name]: parseFloat(e.target.value) }
+        }
         dispatch(setProductsArray(newArray))
     }
 
@@ -65,11 +70,11 @@ export default function ProductsList({ products, category, className, type }) {
                             </TableCell>
                             <TableCell align="center" className='rowInfo'>{product.color}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.size && product.size}{product.unitSize}</TableCell>
-                            <TableCell align="center" className='rowInfo' sx={{ fontWeight: 'bolder' }}>{category === true ? <TextField type='number' name='price' label={copyProductsArray.find(p=>p._id===product._id).price} onChange={(e) => handleChange(product, e)} onWheel={handleWheel}/> : product.price}</TableCell>
-                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='stock' onChange={(e) => handleChange(product, e)} onWheel={handleWheel}/> : product.stock}</TableCell>
-                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='purchasePrice' label={copyProductsArray.find(p=>p._id===product._id).purchasePrice} onChange={(e) => handleChange(product, e)} onWheel={handleWheel}/> : product.purchasePrice && product.purchasePrice}</TableCell>
-                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='recommendedRetailPrice' value={roundDecimals(product.purchasePrice * 1.3, 2)} onChange={(e) => handleChange(product, e)} onWheel={handleWheel}/> : product.recommendedRetailPrice && product.recommendedRetailPrice}</TableCell>
-                            {type !== home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={()=>handleAdd(product)}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
+                            <TableCell align="center" className='rowInfo' sx={{ fontWeight: 'bolder' }}>{category === true ? <TextField type='number' name='price' label={copyProductsArray.find(p => p._id === product._id).price} onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /> : product.price}</TableCell>
+                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='stock' onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /> : product.stock}</TableCell>
+                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='purchasePrice' label={copyProductsArray.find(p => p._id === product._id).purchasePrice} onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /> : product.purchasePrice && product.purchasePrice}</TableCell>
+                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='recommendedRetailPrice' value={roundDecimals(product.purchasePrice * 1.3, 2)} onWheel={handleWheel} /> : product.recommendedRetailPrice && product.recommendedRetailPrice}</TableCell>
+                            {type !== home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => handleAdd(product)}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
                         </TableRow>
                     )}
                 </TableBody>

@@ -35,4 +35,10 @@ export function capitalizeFirstLetter(string) {
 
 export const handleWheel = (e) => {
     e.target.blur();
-};
+}
+
+export function updateStock(productsList, productsSelected) {
+    let copyArray = productsList.filter(prod => productsSelected.find(p => p._id === prod._id))
+    copyArray = copyArray.map(prod => ({ ...prod, stock: prod.stock + productsSelected.find(p => p._id === prod._id).stock, price: productsSelected.find(p => p._id === prod._id).price, purchasePrice: productsSelected.find(p => p._id === prod._id).purchasePrice, recommendedRetailPrice: productsSelected.find(p => p._id === prod._id).recommendedRetailPrice }))
+    return copyArray;
+}
