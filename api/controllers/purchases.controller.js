@@ -17,12 +17,12 @@ const getPurchaseById = async (req, res) => {
 }
 
 const savePurchase = async (req, res) => {
-    let { total, date, idProducts } = req.body;
-    if (!total || !date || !idProducts) return res.status(400).send({ status: "error", error: "Imcomplete values" });
+    let { total, date, productsArray } = req.body;
+    if (!total || !date || !productsArray) return res.status(400).send({ status: "error", error: "Imcomplete values" });
     await purchaseService.save({
         total, 
         date,  
-        idProducts
+        productsArray
     })
     res.send({ status: "success", message: "Purchase added" })
 }

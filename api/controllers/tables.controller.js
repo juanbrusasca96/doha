@@ -18,13 +18,13 @@ const getTableById = async (req, res) => {
 }
 
 const saveTable = async (req, res) => {
-    let { total, date, name, idProducts, active } = req.body;
-    if (!total || !date || !name || !idProducts || !active) return res.status(400).send({ status: "error", error: "Imcomplete values" });
+    let { total, date, name, productsArray, active } = req.body;
+    if (!total || !date || !name || !productsArray || !active) return res.status(400).send({ status: "error", error: "Imcomplete values" });
     await tableService.save({
         total, 
         date, 
         name, 
-        idProducts, 
+        productsArray, 
         active
     })
     res.send({ status: "success", message: "Table added" })
