@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Calendar } from 'react-calendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../../redux/features/products/productsGetSlice'
-import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice'
+import { setDate, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice'
 import { categories, colors, purchase, sortOptions } from '../../utils/utils.js'
 // import ProductCard from '../productCard/ProductCard'
 import ProductsList from '../productsList/ProductsList'
@@ -13,7 +13,7 @@ const colorsOptions = ['Todos', ...colors.slice(1)];
 
 export default function ProductsContainer({ productsList, type }) {
     const dispatch = useDispatch();
-    const [day, setDay] = React.useState(new Date());
+    const [date, setDate] = React.useState(new Date());
     const productsArray = useSelector((state) => state.purchases.productsArray)
     const products = useSelector((state) => state.products[productsList]).filter((product) => !productsArray.find(prod => prod._id === product._id));
     const [sort, setSort] = useState(sortOptions[0]);
@@ -60,7 +60,7 @@ export default function ProductsContainer({ productsList, type }) {
             <Grid container sx={{ gap: '2%' }}>
                 <BasicSelect list={sortOptions} value={sort} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='sort' label='Ordenar por' />
                 <BasicSelect list={colorsOptions} value={color} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='color' label='Filtrar por color' />
-                {type === purchase ? <Calendar onChange={setDay} value={day} /> : ''}
+                {type === purchase ? <Calendar onChange={setDate} value={date} /> : ''}
             </Grid>
             {
                 productsArray.length > 0 && <ProductsList products={productsArray} category={true} className='added' type={type} />
