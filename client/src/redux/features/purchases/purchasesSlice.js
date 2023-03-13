@@ -27,9 +27,14 @@ const purchaseSlice = createSlice({
                 ...state,
                 copyProductsArray: [...state.copyProductsArray, action.payload]
             }
+        },
+        clearAction:()=>{
+            return{
+                ...initialState
+            }
         }
     }
 })
 
-export const { setProductsArrayAction, setTotalAction, setCopyProductsArrayAction } = purchaseSlice.actions;
+export const { setProductsArrayAction, setTotalAction, setCopyProductsArrayAction, clearAction } = purchaseSlice.actions;
 export default purchaseSlice.reducer;

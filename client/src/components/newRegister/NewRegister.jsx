@@ -12,25 +12,32 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Grid } from '@mui/material';
-import { newProduct, purchase } from '../../utils/utils';
+import { newProduct, purchase, updateStock } from '../../utils/utils';
 import Search from '../search/Search';
 import ProductsContainer from '../productsContainer/ProductsContainer';
-import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
+import { clear, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function NewRegister({ open, handleClose, handleClickOpen, type }) {
+export default function NewRegister({ open, handleClose, handleClickOpen, type, productsList }) {
     const dispatch = useDispatch();
     const total = useSelector((state) => state.purchases.total)
+    const productsArray = useSelector((state) => state.purchases.productsArray)
+    const products = useSelector((state) => state.products[productsList])
 
     const handleClosePurchase = () => {
         if (type === purchase) {
-            dispatch(setProductsArray([]))
+            dispatch(clear())
         }
         handleClose()
+    }
+
+    const handleClick = () => {
+        let stockUpdated = updateStock(products, productsArray)
+        console.log(stockUpdated); //dispatch
     }
 
     return (
@@ -63,14 +70,13 @@ export default function NewRegister({ open, handleClose, handleClickOpen, type }
                                     Valor de la compra: {total}
                                 </Typography>
                             </Grid>
-
-                            <Button autoFocus color="inherit" onClick={handleClose}>
+                            <Button autoFocus color="inherit" onClick={handleClick}>
                                 Registrar compra
                             </Button>
                         </Grid>
                     </Toolbar>
                 </AppBar>
-                <ProductsContainer productsList='allProductsFilterSearch' type={purchase} />
+                <ProductsContainer productsList={productsList} type={purchase} />
             </Dialog>
         </div>
     );
