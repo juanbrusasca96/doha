@@ -27,6 +27,7 @@ export default function NewRegister({ open, handleClose, handleClickOpen, type, 
     const total = useSelector((state) => state.purchases.total)
     const productsArray = useSelector((state) => state.purchases.productsArray)
     const products = useSelector((state) => state.products[productsList])
+    const [date, setDate] = React.useState(new Date());
 
     const handleClosePurchase = () => {
         if (type === purchase) {
@@ -76,7 +77,7 @@ export default function NewRegister({ open, handleClose, handleClickOpen, type, 
                         </Grid>
                     </Toolbar>
                 </AppBar>
-                <ProductsContainer productsList={productsList} type={purchase} />
+                <ProductsContainer productsList={productsList} type={purchase} date={date} setDate={setDate} />
             </Dialog>
         </div>
     );

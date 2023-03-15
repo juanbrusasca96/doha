@@ -12,9 +12,8 @@ import BasicSelect from '../select/BasicSelect'
 
 const colorsOptions = ['Todos', ...colors.slice(1)];
 
-export default function ProductsContainer({ productsList, type }) {
+export default function ProductsContainer({ productsList, type, date, setDate }) {
     const dispatch = useDispatch();
-    const [date, setDate] = React.useState(new Date());
     const productsArray = useSelector((state) => state.purchases.productsArray)
     const products = useSelector((state) => state.products[productsList]).filter((product) => !productsArray.find(prod => prod._id === product._id));
     const [sort, setSort] = useState(sortOptions[0]);
@@ -56,6 +55,7 @@ export default function ProductsContainer({ productsList, type }) {
         dispatch(getAllProducts(options))
     }, [options])
 
+    console.log(date);
     return (
         <Grid sx={{ padding: '1%' }} className='productContainer'>
             <Grid container sx={{ gap: '2%' }}>
