@@ -39,7 +39,6 @@ app.use('/api/products', productsRouter)
 app.use('/api/users', usersRouter)
 app.use('api/tables', tablesRouter)
 app.use('/api/session', sessionRouter)
-app.use('/api/session', sessionRouter)
 app.use('/api/purchases', purchasesRouter)
 app.use('/api/days', daysRouter)
 
