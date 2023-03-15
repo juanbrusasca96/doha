@@ -20,8 +20,8 @@ export const clear = () => {
     }
 }
 
-export const sendPurchase = (stockUpdatedArray, productsSelected) => {
+export const sendPurchase = (stockUpdatedArray, purchase) => {
     return async (dispatch) => {
-        
+        await axios.post('/api/purchases', purchase)
     }
 }

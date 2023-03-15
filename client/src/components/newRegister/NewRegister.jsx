@@ -15,7 +15,7 @@ import { Grid } from '@mui/material';
 import { newProduct, purchase, updateStock } from '../../utils/utils';
 import Search from '../search/Search';
 import ProductsContainer from '../productsContainer/ProductsContainer';
-import { clear, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
+import { clear, sendPurchase, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -38,8 +38,12 @@ export default function NewRegister({ open, handleClose, handleClickOpen, type, 
 
     const handleClick = () => {
         let stockUpdated = updateStock(products, productsArray)
-        console.log(stockUpdated); //dispatch
+        dispatch(sendPurchase(stockUpdated, { total: total, date: date, productsArray: productsArray }))
+        dispatch(clear())
+        handleClose()
     }
+
+    console.log(productsArray);
 
     return (
         <div>
