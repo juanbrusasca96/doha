@@ -7,6 +7,7 @@ import { setDate, setProductsArray } from '../../redux/features/purchases/purcha
 import { categories, colors, purchase, sortOptions } from '../../utils/utils.js'
 // import ProductCard from '../productCard/ProductCard'
 import ProductsList from '../productsList/ProductsList'
+import ProductsListPurchase from '../productsListPurchase/ProductsListPurchase'
 import BasicSelect from '../select/BasicSelect'
 
 const colorsOptions = ['Todos', ...colors.slice(1)];
@@ -63,7 +64,7 @@ export default function ProductsContainer({ productsList, type }) {
                 {type === purchase ? <Calendar onChange={setDate} value={date} /> : ''}
             </Grid>
             {
-                productsArray.length > 0 && <ProductsList products={productsArray} category={true} className='added' type={type} />
+                productsArray.length > 0 && <ProductsListPurchase products={productsArray} className='added' />
             }
             {
                 categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} type={type} /></Grid>))

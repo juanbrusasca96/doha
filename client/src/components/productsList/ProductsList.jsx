@@ -6,10 +6,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Avatar, Button, Grid, IconButton, TextField, Typography } from '@mui/material';
+import { Avatar, Grid, IconButton, Typography } from '@mui/material';
+import { home } from '../../utils/utils';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { handleWheel, home, roundDecimals } from '../../utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCopyProductsArray, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
 
@@ -18,29 +17,11 @@ import { setCopyProductsArray, setProductsArray } from '../../redux/features/pur
 export default function ProductsList({ products, category, className, type }) {
     const dispatch = useDispatch();
     const productsArray = useSelector((state) => state.purchases.productsArray)
-    const copyProductsArray = useSelector((state) => state.purchases.copyProductsArray)
-    const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', category === true ? 'Cantidad comprada' : 'Stock', 'Precio de compra', 'Precio de venta sugerido']
+    const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', 'Stock', 'Precio de compra', 'Precio de venta sugerido']
 
     const handleAdd = (product) => {
-        if (category === true) {
-            dispatch(setProductsArray(products.filter((p) => p !== product)))
-        }
-        else {
-            dispatch(setProductsArray([...productsArray, product]))
-            dispatch(setCopyProductsArray(product))
-        }
-    }
-
-    const handleChange = (product, e) => {
-        let index = productsArray.indexOf(product)
-        let newArray = [...productsArray]
-        if (e.target.name === 'purchasePrice') {
-            newArray[index] = { ...product, [e.target.name]: parseFloat(e.target.value), recommendedRetailPrice: roundDecimals(parseFloat(e.target.value) * 1.3, 2) }
-        }
-        else {
-            newArray[index] = { ...product, [e.target.name]: parseFloat(e.target.value) }
-        }
-        dispatch(setProductsArray(newArray))
+        dispatch(setProductsArray([...productsArray, product]))
+        dispatch(setCopyProductsArray(product))
     }
 
     return (
@@ -56,7 +37,7 @@ export default function ProductsList({ products, category, className, type }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {products.map((product) => (product.category === category || category === true) &&
+                    {products.map((product) => product.category === category &&
                         <TableRow
                             key={product.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -70,11 +51,11 @@ export default function ProductsList({ products, category, className, type }) {
                             </TableCell>
                             <TableCell align="center" className='rowInfo'>{product.color}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.size && product.size}{product.unitSize}</TableCell>
-                            <TableCell align="center" className='rowInfo' sx={{ fontWeight: 'bolder' }}>{category === true ? <TextField type='number' name='price' label={copyProductsArray.find(p => p._id === product._id).price} onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /> : product.price}</TableCell>
-                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='stock' onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /> : product.stock}</TableCell>
-                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='purchasePrice' label={copyProductsArray.find(p => p._id === product._id).purchasePrice} onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /> : product.purchasePrice && product.purchasePrice}</TableCell>
-                            <TableCell align="center" className='rowInfo'>{category === true ? <TextField type='number' name='recommendedRetailPrice' value={roundDecimals(product.purchasePrice * 1.3, 2)} onWheel={handleWheel} /> : product.recommendedRetailPrice && product.recommendedRetailPrice}</TableCell>
-                            {type !== home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => handleAdd(product)}> {category === true ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}</IconButton></TableCell>}
+                            <TableCell align="center" className='rowInfo' sx={{ fontWeight: 'bolder' }}>{product.price}</TableCell>
+                            <TableCell align="center" className='rowInfo'>{product.stock}</TableCell>
+                            <TableCell align="center" className='rowInfo'>{product.purchasePrice && product.purchasePrice}</TableCell>
+                            <TableCell align="center" className='rowInfo'>{product.recommendedRetailPrice && product.recommendedRetailPrice}</TableCell>
+                            {type !== home && <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => handleAdd(product)}> <AddCircleOutlineIcon /></IconButton></TableCell>}
                         </TableRow>
                     )}
                 </TableBody>
