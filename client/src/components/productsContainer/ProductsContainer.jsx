@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Calendar } from 'react-calendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../../redux/features/products/productsGetSlice'
-import { setDate, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice'
 import { categories, colors, purchase, sortOptions } from '../../utils/utils.js'
-// import ProductCard from '../productCard/ProductCard'
 import ProductsList from '../productsList/ProductsList'
 import ProductsListPurchase from '../productsListPurchase/ProductsListPurchase'
 import BasicSelect from '../select/BasicSelect'
@@ -55,7 +53,6 @@ export default function ProductsContainer({ productsList, type, date, setDate })
         dispatch(getAllProducts(options))
     }, [options])
 
-    console.log(date);
     return (
         <Grid sx={{ padding: '1%' }} className='productContainer'>
             <Grid container sx={{ gap: '2%' }}>
