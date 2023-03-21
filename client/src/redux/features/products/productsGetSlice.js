@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { createProductAction, getAllProductsAction, getAllProductsWithStockAction, filterSearchBarAction } from "./productsSlice";
+import { createProductAction, getAllProductsAction, getAllProductsWithStockAction, filterSearchBarAction, clearAction } from "./productsSlice";
 
 export const createProduct = (product) => {
     return async (dispatch) => {
@@ -27,5 +27,30 @@ export const getAllProducts = (options) => {
 export const productsFilterSearch = (value) => {
     return (dispatch) => {
         dispatch(filterSearchBarAction(value))
+    }
+}
+
+export const updateStockInDB = (stockUpdated, products) => {
+    return async (dispatch) => {
+        let array = [];
+        for (let i = 0; i < stockUpdated.length; i++) {
+            let response = await axios.post(`/api/products/${stockUpdated[i]._id}`, stockUpdated[i])
+            array.push(response.data.payload)
+        }
+        products.forEach(product => {
+            if (!array.find(p => p._id === product._id)) {
+                array.push(product)
+            }
+        })
+        array = array.sort((a, b) => a.name.localeCompare(b.name))
+        dispatch(getAllProductsAction(array))
+        dispatch(getAllProductsWithStockAction(array.filter(elem => elem.stock > 0)))
+    }
+}
+
+export const clearProducts = () => {
+    console.log('si');
+    return (dispatch) => {
+        dispatch(clearAction())
     }
 }

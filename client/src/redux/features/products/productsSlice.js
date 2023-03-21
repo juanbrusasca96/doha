@@ -39,8 +39,13 @@ const productSlice = createSlice({
                 allProductsWithStockFilterSearch: action.payload ? state.allProductsWithStock.filter(elem => elem.name.toLowerCase().includes(action.payload)) : state.allProductsWithStock
             }
         },
+        clearAction: () => {
+            return {
+                ...initialState
+            }
+        }
     }
 })
 
-export const { createProductAction, getAllProductsAction, getAllProductsWithStockAction, filterSearchBarAction } = productSlice.actions;
+export const { createProductAction, getAllProductsAction, getAllProductsWithStockAction, filterSearchBarAction, clearAction } = productSlice.actions;
 export default productSlice.reducer;
