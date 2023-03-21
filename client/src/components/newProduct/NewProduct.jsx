@@ -19,10 +19,10 @@ export default function NewProduct({ open, handleClose }) {
 
     const handleProduct = (e, key, value) => {
         if (!!key && !!value) {
-            setProduct({ ...product, [key]: value, [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value })
+            setProduct({ ...product, [key]: value, [e.target.name]: e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value })
         }
         else {
-            setProduct({ ...product, [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value })
+            setProduct({ ...product, [e.target.name]: e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value })
         }
     }
 
