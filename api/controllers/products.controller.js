@@ -43,8 +43,8 @@ const updateProduct = async (req, res) => {
     let content = req.body;
     let product = await productService.getBy({ _id: pid })
     if (!product) res.status(404).send({ status: "error", error: "Not found" })
-    await productService.update(pid, content)
-    res.send({ status: "success", message: "Product updated" })
+    let response = await productService.update(pid, content)
+    res.send({ status: "success", message: "Product updated", payload: response })
 }
 
 const deleteProduct = async (req, res) => {
