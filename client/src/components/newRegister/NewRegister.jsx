@@ -1,10 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -17,6 +13,7 @@ import Search from '../search/Search';
 import ProductsContainer from '../productsContainer/ProductsContainer';
 import { clear, sendPurchase, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { clearProducts, getAllProducts, updateStockInDB } from '../../redux/features/products/productsGetSlice';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -38,12 +35,11 @@ export default function NewRegister({ open, handleClose, handleClickOpen, type, 
 
     const handleClick = () => {
         let stockUpdated = updateStock(products, productsArray)
-        dispatch(sendPurchase(stockUpdated, { total: total, date: date, productsArray: productsArray }))
+        dispatch(sendPurchase({ total: total, date: date, productsArray: productsArray }))
+        dispatch(updateStockInDB(stockUpdated, products))
         dispatch(clear())
         handleClose()
     }
-
-    console.log(productsArray);
 
     return (
         <div>
