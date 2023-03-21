@@ -21,12 +21,13 @@ export const newPromo = 'Nueva promo'
 export const pages = [newTable, newProduct, newPromo, newPurchase, statistics];
 
 export function roundDecimals(number, decimals) {
-    let numberRegexp = new RegExp('\\d\\.(\\d){' + decimals + ',}');
-    if (numberRegexp.test(number)) {
-        return Number(number.toFixed(decimals));
-    } else {
-        return Number(number.toFixed(decimals)) === 0 ? 0 : number;
-    }
+    // let numberRegexp = new RegExp('\\d\\.(\\d){' + decimals + ',}');
+    // if (numberRegexp.test(number)) {
+    //     return Number(number.toFixed(decimals));
+    // } else {
+    //     return Number(number.toFixed(decimals)) === 0 ? 0 : number;
+    // }
+    return number.toFixed(decimals)
 }
 
 export function capitalizeFirstLetter(string) {
