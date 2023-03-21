@@ -28,8 +28,8 @@ const purchaseSlice = createSlice({
                 copyProductsArray: [...state.copyProductsArray, action.payload]
             }
         },
-        clearAction:()=>{
-            return{
+        clearAction: () => {
+            return {
                 ...initialState
             }
         }
