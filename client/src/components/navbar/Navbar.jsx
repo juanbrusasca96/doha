@@ -16,12 +16,16 @@ import NewProduct from '../newProduct/NewProduct';
 import Search from '../search/Search';
 import NewRegister from '../newRegister/NewRegister';
 import { newProduct, newPurchase, pages, purchase } from '../../utils/utils';
+import StartDay from '../startDay/StartDay';
+import { Grid } from '@mui/material';
 
 export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [open, setOpen] = React.useState({});
+    const [openStartDay, setOpenStartDay] = React.useState(false);
     const user = useSelector((state) => state.users.currentUser);
+    const activeDay = useSelector((state) => state.days.active)
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -58,6 +62,7 @@ export default function NavBar({ logOut }) {
 
             <NewProduct open={open && open[newProduct]} handleClose={() => handleClose(newProduct)} />
             <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} productsList='allProductsFilterSearch' />
+            <StartDay open={openStartDay} handleClose={() => setOpenStartDay(false)} />
 
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
@@ -68,7 +73,7 @@ export default function NavBar({ logOut }) {
                         component="a"
                         href="/home"
                         sx={{
-                            mr: 2,
+                            pr: 2,
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
@@ -123,7 +128,7 @@ export default function NavBar({ logOut }) {
                         component="a"
                         href="/home"
                         sx={{
-                            mr: 2,
+                            pr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
                             fontFamily: 'monospace',
@@ -135,19 +140,25 @@ export default function NavBar({ logOut }) {
                     >
                         DOHA
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1%' }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={() => handleClickOpen(page)}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
-                    </Box>
 
-                    <Search width='30%'/>
+                    <Grid item container justifyContent="space-between">
+                        {
+                            activeDay ? <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1%' }}>
+                                {pages.map((page) => (
+                                    <Button
+                                        key={page}
+                                        onClick={() => handleClickOpen(page)}
+                                        sx={{ my: 2, color: 'white', display: 'block' }}
+                                    >
+                                        {page}
+                                    </Button>
+                                ))}
+                            </Box> : <Button variant='contained' color='warning' onClick={() => setOpenStartDay(true)} sx={{ my: 2, color: 'white', display: 'block' }}>Empezar dia</Button>
+                        }
+                        <Search width='30%' />
+                    </Grid>
+
+
 
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
