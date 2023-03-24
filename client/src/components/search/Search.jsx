@@ -1,4 +1,4 @@
-import { alpha, Box, InputBase, styled } from '@mui/material'
+import { alpha, Box, Grid, InputBase, styled } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,8 +15,7 @@ const SearchBar = styled('div')(({ theme }) => ({
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
+        marginLeft: theme.spacing(3)
     },
 }));
 
@@ -59,7 +58,7 @@ export default function Search({width}) {
     }, [search, products])
 
     return (
-        <Box sx={{ width }}>
+        <Grid container alignItems='center' sx={{ width }}>
             <SearchBar>
                 <SearchIconWrapper>
                     <SearchIcon />
@@ -69,6 +68,6 @@ export default function Search({width}) {
                     inputProps={{ 'aria-label': 'search' }}
                     onChange={(e) => handleSearchChange(e)} />
             </SearchBar>
-        </Box>
+        </Grid>
     )
 }
