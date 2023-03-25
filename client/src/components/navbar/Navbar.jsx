@@ -64,7 +64,7 @@ export default function NavBar({ logOut }) {
             <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} productsList='allProductsFilterSearch' />
             <StartDay open={openStartDay} handleClose={() => setOpenStartDay(false)} />
 
-            <Container maxWidth="//#endregion">
+            <Container maxWidth="//#endregion" className='navbar'>
                 <Toolbar disableGutters>
                     <LocalBarIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
@@ -143,7 +143,7 @@ export default function NavBar({ logOut }) {
 
                     <Grid item container justifyContent="space-between">
                         {
-                            activeDay ? <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1%' }}>
+                            !activeDay ? <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1%' }}>
                                 {pages.map((page) => (
                                     <Button
                                         key={page}
@@ -153,6 +153,7 @@ export default function NavBar({ logOut }) {
                                         {page}
                                     </Button>
                                 ))}
+                                <Button variant='contained' color='warning' onClick={() => setOpenStartDay(true)} sx={{ my: 2, color: 'white', display: 'block' }}>Finalizar dia</Button>
                             </Box> : <Button variant='contained' color='warning' onClick={() => setOpenStartDay(true)} sx={{ my: 2, color: 'white', display: 'block' }}>Empezar dia</Button>
                         }
                         <Search width='30%' />
