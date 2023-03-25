@@ -15,6 +15,11 @@
   width: 100%;
 }
 
+.navbar {
+  padding-left: 0.5% !important;
+  padding-right: 0.5% !important;
+}
+
 .table .tableHead {
   height: 8vh;
 }
