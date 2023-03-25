@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    active: false
+    active: false,
+    day: {}
 }
 
 const daySlice = createSlice({
@@ -13,9 +14,15 @@ const daySlice = createSlice({
                 ...state,
                 active: action.payload
             }
+        },
+        setDayAction: (state, action) => {
+            return {
+                ...state,
+                day: action.payload
+            }
         }
     }
 })
 
-export const { setActiveDayAction } = daySlice.actions;
+export const { setActiveDayAction, setDayAction } = daySlice.actions;
 export default daySlice.reducer;

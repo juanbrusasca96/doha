@@ -1,0 +1,24 @@
+import axios from "axios";
+import { setActiveDayAction, setDayAction } from "./daysSlice";
+
+export const setDay = (day) => {
+    return async (dispatch) => {
+        let response = await axios.post('/api/days', day)
+        response = response.data.payload
+        if (response) {
+            dispatch(setActiveDayAction(response.active))
+            dispatch(setDayAction(response))
+        }
+    }
+}
+
+export const getDay = () => {
+    return async (dispatch) => {
+        let response = await axios.get('/api/days/activeDay')
+        response = response.data.payload
+        if (response) {
+            dispatch(setActiveDayAction(response.active))
+            dispatch(setDayAction(response))
+        }
+    }
+}
