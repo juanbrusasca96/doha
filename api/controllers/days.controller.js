@@ -5,6 +5,11 @@ const getAllDays = async (req, res) => {
     res.send({ status: "success", payload: days })
 }
 
+const getActiveDay = async (req, res) => {
+    let day = await dayService.getActive();
+    res.send({ status: "success", payload: day })
+}
+
 const getDayById = async (req, res) => {
     let id = req.params.pid;
     try {
@@ -53,5 +58,6 @@ export default {
     getDayById,
     saveDay,
     updateDay,
-    deleteDay
+    deleteDay, 
+    getActiveDay
 }
