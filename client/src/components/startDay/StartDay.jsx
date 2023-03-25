@@ -4,11 +4,18 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { handleWheel } from '../../utils/utils';
+import { useDispatch } from 'react-redux';
+import { setDay } from '../../redux/features/days/daysGetSlice';
 
 export default function StartDay({ open, handleClose }) {
+    const [value, setValue] = React.useState(0);
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(setDay({ date: new Date(), initialAmount: value }))
+    }
 
     return (
         <div>
@@ -23,12 +30,14 @@ export default function StartDay({ open, handleClose }) {
                         type="number"
                         fullWidth
                         variant="standard"
+                        value={value}
+                        onChange={(e) => setValue(parseInt(e.target.value))}
                         onWheel={handleWheel}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Subscribe</Button>
+                    <Button onClick={handleClose}>Cancelar</Button>
+                    <Button onClick={handleClick}>Aceptar</Button>
                 </DialogActions>
             </Dialog>
         </div>
