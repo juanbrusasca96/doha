@@ -58,13 +58,13 @@ export default function NavBar({ logOut }) {
     }, [])
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" >
 
             <NewProduct open={open && open[newProduct]} handleClose={() => handleClose(newProduct)} />
             <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} productsList='allProductsFilterSearch' />
             <StartDay open={openStartDay} handleClose={() => setOpenStartDay(false)} />
 
-            <Container maxWidth="xl">
+            <Container maxWidth="//#endregion">
                 <Toolbar disableGutters>
                     <LocalBarIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
