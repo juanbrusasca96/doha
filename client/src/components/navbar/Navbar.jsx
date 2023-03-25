@@ -15,15 +15,16 @@ import { useSelector } from 'react-redux';
 import NewProduct from '../newProduct/NewProduct';
 import Search from '../search/Search';
 import NewRegister from '../newRegister/NewRegister';
-import { newProduct, newPurchase, pages, purchase } from '../../utils/utils';
+import { endDay, newProduct, newPurchase, pages, purchase, startDay } from '../../utils/utils';
 import StartDay from '../startDay/StartDay';
 import { Grid } from '@mui/material';
+import EndDay from '../endDay/EndDay';
 
 export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [open, setOpen] = React.useState({});
-    const [openStartDay, setOpenStartDay] = React.useState(false);
+    const [openDay, setOpenDay] = React.useState({});
     const user = useSelector((state) => state.users.currentUser);
     const activeDay = useSelector((state) => state.days.active)
 
@@ -62,7 +63,8 @@ export default function NavBar({ logOut }) {
 
             <NewProduct open={open && open[newProduct]} handleClose={() => handleClose(newProduct)} />
             <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} productsList='allProductsFilterSearch' />
-            <StartDay open={openStartDay} handleClose={() => setOpenStartDay(false)} />
+            <StartDay open={openDay && openDay[startDay]} handleClose={() => setOpenDay({ ...openDay, [startDay]: false })} />
+            <EndDay open={openDay && openDay[endDay]} handleClose={() => setOpenDay({ ...openDay, [endDay]: false })} />
 
             <Container maxWidth="//#endregion" className='navbar'>
                 <Toolbar disableGutters>
@@ -143,7 +145,7 @@ export default function NavBar({ logOut }) {
 
                     <Grid item container justifyContent="space-between">
                         {
-                            !activeDay ? <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1%' }}>
+                            activeDay ? <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1%' }}>
                                 {pages.map((page) => (
                                     <Button
                                         key={page}
@@ -153,8 +155,8 @@ export default function NavBar({ logOut }) {
                                         {page}
                                     </Button>
                                 ))}
-                                <Button variant='contained' color='warning' onClick={() => setOpenStartDay(true)} sx={{ my: 2, color: 'white', display: 'block' }}>Finalizar dia</Button>
-                            </Box> : <Button variant='contained' color='warning' onClick={() => setOpenStartDay(true)} sx={{ my: 2, color: 'white', display: 'block' }}>Empezar dia</Button>
+                                <Button variant='contained' color='warning' name={endDay} onClick={(e) => setOpenDay({ ...openDay, [e.target.name]: true })} sx={{ my: 2, color: 'white', display: 'block' }}>Finalizar dia</Button>
+                            </Box> : <Button variant='contained' color='warning' name={startDay} onClick={(e) => setOpenDay({ ...openDay, [e.target.name]: true })} sx={{ my: 2, color: 'white', display: 'block' }}>Empezar dia</Button>
                         }
                         <Search width='30%' />
                     </Grid>
