@@ -17,17 +17,18 @@ const getDayById = async (req, res) => {
 }
 
 const saveDay = async (req, res) => {
-    let { total, date, initialAmount, transferAmount, mercadoPagoAmount, cashAmount } = req.body;
-    if (!total || !date || !initialAmount || !transferAmount || !mercadoPagoAmount || !cashAmount) return res.status(400).send({ status: "error", error: "Imcomplete values" });
-    await dayService.save({
+    let { total, date, initialAmount, transferAmount, mercadoPagoAmount, cashAmount, active } = req.body;
+    if (!date) return res.status(400).send({ status: "error", error: "Imcomplete values" });
+    let response = await dayService.save({
         total,
         date,
         initialAmount,
         transferAmount,
         mercadoPagoAmount,
-        cashAmount
+        cashAmount,
+        active
     })
-    res.send({ status: "success", message: "Day added" })
+    res.send({ status: "success", message: "Day added", payload: response })
 }
 
 const updateDay = async (req, res) => {

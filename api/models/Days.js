@@ -9,7 +9,8 @@ const daySchema = new Schema({
     initialAmount: { type: Number, default: 0 },
     transferAmount: { type: Number, default: 0 },
     mercadoPagoAmount: { type: Number, default: 0 },
-    cashAmount: { type: Number, default: 0 }
+    cashAmount: { type: Number, default: 0 },
+    active: { type: Boolean, default: true }
 })
 
 export default daySchema;
