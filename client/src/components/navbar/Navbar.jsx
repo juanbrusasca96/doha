@@ -159,8 +159,6 @@ export default function NavBar({ logOut }) {
                         <Search width='30%' />
                     </Grid>
 
-
-
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                             <Avatar alt="Remy Sharp" src={user && user.imageURL} />
