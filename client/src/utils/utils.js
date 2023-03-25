@@ -16,7 +16,10 @@ export const newTable = 'Nueva mesa';
 export const newProduct = 'Nuevo producto';
 export const newPurchase = 'Nueva compra';
 export const statistics = 'Estadisticas';
-export const newPromo = 'Nueva promo'
+export const newPromo = 'Nueva promo';
+
+export const startDay = "start";
+export const endDay = "end";
 
 export const pages = [newTable, newProduct, newPromo, newPurchase, statistics];
 
