@@ -10,11 +10,12 @@ import { useDispatch } from 'react-redux';
 import { setDay } from '../../redux/features/days/daysGetSlice';
 
 export default function StartDay({ open, handleClose }) {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState();
     const dispatch = useDispatch();
 
     const handleClick = () => {
         dispatch(setDay({ date: new Date(), initialAmount: value }))
+        handleClose()
     }
 
     return (
