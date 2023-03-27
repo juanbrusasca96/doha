@@ -41,8 +41,8 @@ const updateDay = async (req, res) => {
     let content = req.body;
     let day = await dayService.getBy({ _id: pid })
     if (!day) res.status(404).send({ status: "error", error: "Not found" })
-    await dayService.update(pid, content)
-    res.send({ status: "success", message: "Day updated" })
+    let response = await dayService.update(pid, content)
+    res.send({ status: "success", message: "Day updated", payload: response })
 }
 
 const deleteDay = async (req, res) => {
