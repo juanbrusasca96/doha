@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NewProduct from '../newProduct/NewProduct';
 import Search from '../search/Search';
 import NewRegister from '../newRegister/NewRegister';
@@ -19,6 +19,7 @@ import { endDay, newProduct, newPurchase, pages, purchase, startDay } from '../.
 import StartDay from '../startDay/StartDay';
 import { Grid } from '@mui/material';
 import EndDay from '../endDay/EndDay';
+import { getDay } from '../../redux/features/days/daysGetSlice';
 
 export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -26,7 +27,8 @@ export default function NavBar({ logOut }) {
     const [open, setOpen] = React.useState({});
     const [openDay, setOpenDay] = React.useState({});
     const user = useSelector((state) => state.users.currentUser);
-    const activeDay = useSelector((state) => state.days.active)
+    const activeDay = useSelector((state) => state.days.day?.active);
+    const dispatch = useDispatch();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -56,6 +58,7 @@ export default function NavBar({ logOut }) {
             }
         })
         setOpen(obj);
+        dispatch(getDay());
     }, [])
 
     return (
