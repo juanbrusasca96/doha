@@ -14,12 +14,13 @@ import LocalBarIcon from '@mui/icons-material/LocalBar';
 import { useDispatch, useSelector } from 'react-redux';
 import NewProduct from '../newProduct/NewProduct';
 import Search from '../search/Search';
-import NewRegister from '../newRegister/NewRegister';
-import { endDay, newProduct, newPurchase, pages, purchase, startDay } from '../../utils/utils';
+import NewPurchase from '../newPurchase/NewPurchase';
+import { endDay, newProduct, newPromo, newPurchase, pages, purchase, startDay } from '../../utils/utils';
 import StartDay from '../startDay/StartDay';
 import { Grid } from '@mui/material';
 import EndDay from '../endDay/EndDay';
 import { getDay } from '../../redux/features/days/daysGetSlice';
+import NewPromo from '../newPromo/NewPromo';
 
 export default function NavBar({ logOut }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -65,7 +66,8 @@ export default function NavBar({ logOut }) {
         <AppBar position="static" >
 
             <NewProduct open={open && open[newProduct]} handleClose={() => handleClose(newProduct)} />
-            <NewRegister open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} productsList='allProductsFilterSearch' />
+            <NewPromo open={open && open[newPromo]} handleClose={() => handleClose(newPromo)} handleClickOpen={(value) => handleClickOpen(value)} productsList='allProductsFilterSearch' />
+            <NewPurchase open={open && open[newPurchase]} handleClose={() => handleClose(newPurchase)} handleClickOpen={(value) => handleClickOpen(value)} type={purchase} productsList='allProductsFilterSearch' />
             <StartDay open={openDay && openDay[startDay]} handleClose={() => setOpenDay({ ...openDay, [startDay]: false })} />
             <EndDay open={openDay && openDay[endDay]} handleClose={() => setOpenDay({ ...openDay, [endDay]: false })} />
 
