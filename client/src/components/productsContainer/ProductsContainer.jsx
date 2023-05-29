@@ -12,8 +12,8 @@ const colorsOptions = ['Todos', ...colors.slice(1)];
 
 export default function ProductsContainer({ productsList, type, date, setDate }) {
     const dispatch = useDispatch();
-    const productsArray = useSelector((state) => state.purchases.productsArray)
-    const products = useSelector((state) => state.products[productsList]).filter((product) => !productsArray.find(prod => prod._id === product._id));
+    const productsPurchaseArray = useSelector((state) => state.purchases.productsArray)
+    const products = useSelector((state) => state.products[productsList]).filter((product) => !productsPurchaseArray.find(prod => prod._id === product._id));
     const [sort, setSort] = useState(sortOptions[0]);
     const [color, setColor] = useState(colorsOptions[0]);
     const [options, setOptions] = useState({
@@ -61,7 +61,7 @@ export default function ProductsContainer({ productsList, type, date, setDate })
                 {type === purchase ? <Calendar onChange={setDate} value={date} /> : ''}
             </Grid>
             {
-                productsArray.length > 0 && <ProductsListPurchase products={productsArray} className='added' />
+                productsPurchaseArray.length > 0 && <ProductsListPurchase products={productsPurchaseArray} className='added' />
             }
             {
                 categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} type={type} /></Grid>))
