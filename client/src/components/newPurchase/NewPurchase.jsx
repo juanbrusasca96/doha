@@ -19,7 +19,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function NewRegister({ open, handleClose, handleClickOpen, type, productsList }) {
+export default function NewPurchase({ open, handleClose, handleClickOpen, type, productsList }) {
     const dispatch = useDispatch();
     const total = useSelector((state) => state.purchases.total)
     const productsArray = useSelector((state) => state.purchases.productsArray)
