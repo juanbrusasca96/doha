@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Grid } from '@mui/material';
-import { newProduct, updateStock } from '../../utils/utils';
+import { newProduct, promo, updateStock } from '../../utils/utils';
 import Search from '../search/Search';
 import ProductsContainer from '../productsContainer/ProductsContainer';
 import { clear, sendPurchase, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
@@ -23,7 +23,7 @@ export default function NewPromo({ open, handleClose, handleClickOpen, type, pro
     const dispatch = useDispatch();
     const productsArray = useSelector((state) => state.purchases.productsArray)
     const products = useSelector((state) => state.products[productsList])
-    const [date, setDate] = React.useState(new Date());
+    const [product, setProduct] = React.useState({});
 
     const handleClosePurchase = () => {
         handleClose()
@@ -34,6 +34,10 @@ export default function NewPromo({ open, handleClose, handleClickOpen, type, pro
         dispatch(updateStockInDB(stockUpdated, products))
         dispatch(clear())
         handleClose()
+    }
+
+    const handleChange=(e)=>{
+
     }
 
     return (
@@ -61,13 +65,18 @@ export default function NewPromo({ open, handleClose, handleClickOpen, type, pro
                                 </Button>
                                 <Search width='60%' />
                             </Grid>
+                            <Grid>
+                                <Typography display='flex' alignItems='center' sx={{ height: '100%' }}>
+                                    {/* Valor de la compra: {total} */}
+                                </Typography>
+                            </Grid>
                             <Button autoFocus color="inherit" onClick={handleClick}>
                                 Registrar promo
                             </Button>
                         </Grid>
                     </Toolbar>
                 </AppBar>
-                <ProductsContainer productsList={productsList} date={date} setDate={setDate} />
+                <ProductsContainer productsList={productsList} type={promo} />
             </Dialog>
         </div>
     );

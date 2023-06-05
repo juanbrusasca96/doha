@@ -10,18 +10,18 @@ import { Avatar, Grid, IconButton, TextField, Typography } from '@mui/material';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { handleWheel, roundDecimals } from '../../utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
+import { setIdProducts, setProductsPromoArray } from '../../redux/features/promos/promosGetSlice';
 
 
 
-export default function ProductsListPurchase({ products, className }) {
+export default function ProductsListPromo({ products, className }) {
     const dispatch = useDispatch();
-    const productsArray = useSelector((state) => state.purchases.productsArray)
-    const copyProductsArray = useSelector((state) => state.purchases.copyProductsArray)
+    const productsArray = useSelector((state) => state.promos.productsArray)
+    const copyProductsArray = useSelector((state) => state.promos.copyProductsArray)
     const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', 'Cantidad comprada', 'Precio de compra', 'Precio de venta sugerido']
 
     const handleRemove = (product) => {
-        dispatch(setProductsArray(products.filter((p) => p !== product)))
+        dispatch(setProductsPromoArray(products.filter((p) => p !== product)))
     }
 
     const handleChange = (product, e) => {
@@ -38,7 +38,7 @@ export default function ProductsListPurchase({ products, className }) {
                 newArray[index] = { ...product, [e.target.name]: parseFloat(e.target.value) }
             }
         }
-        dispatch(setProductsArray(newArray))
+        dispatch(setProductsPromoArray(newArray))
     }
 
     return (
@@ -66,13 +66,13 @@ export default function ProductsListPurchase({ products, className }) {
                                     </Typography>
                                 </Grid>
                             </TableCell>
-                            <TableCell align="center" className='rowInfo'>{product.color}</TableCell>
+                            {/* <TableCell align="center" className='rowInfo'>{product.color}</TableCell>
                             <TableCell align="center" className='rowInfo'>{product.size && product.size}{product.unitSize}</TableCell>
                             <TableCell align="center" className='rowInfo' sx={{ fontWeight: 'bolder' }}><TextField type='number' name='price' label={copyProductsArray.find(p => p._id === product._id).price} onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /></TableCell>
                             <TableCell align="center" className='rowInfo'><TextField type='number' name='stock' onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /></TableCell>
                             <TableCell align="center" className='rowInfo'><TextField type='number' name='purchasePrice' label={copyProductsArray.find(p => p._id === product._id).purchasePrice} onChange={(e) => handleChange(product, e)} onWheel={handleWheel} /></TableCell>
                             <TableCell align="center" className='rowInfo'><TextField type='number' name='recommendedRetailPrice' value={roundDecimals(product.purchasePrice * 1.3, 2)} onWheel={handleWheel} /></TableCell>
-                            <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => handleRemove(product)}><RemoveCircleOutlineIcon /></IconButton></TableCell>
+                            <TableCell align="center" className='rowInfo'> <IconButton color="primary" onClick={() => handleRemove(product)}><RemoveCircleOutlineIcon /></IconButton></TableCell> */}
                         </TableRow>
                     )}
                 </TableBody>

@@ -7,21 +7,31 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Avatar, Grid, IconButton, Typography } from '@mui/material';
-import { home } from '../../utils/utils';
+import { home, promo, purchase } from '../../utils/utils';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCopyProductsArray, setProductsArray } from '../../redux/features/purchases/purchasesGetSlice';
+import { setCopyProductsPromoArray, setIdProducts, setProductsPromoArray } from '../../redux/features/promos/promosGetSlice';
 
 
 
 export default function ProductsList({ products, category, className, type }) {
     const dispatch = useDispatch();
-    const productsArray = useSelector((state) => state.purchases.productsArray)
+    const productsPurchaseArray = useSelector((state) => state.purchases.productsArray)
+    const productsPromoArray = useSelector((state) => state.promos.productsArray)
+    const idProducts=useSelector((state)=>state.promos.idProducts)
     const columns = ['Nombre', 'Color', 'Tamaño', 'Precio de venta', 'Stock', 'Precio de compra', 'Precio de venta sugerido']
 
     const handleAdd = (product) => {
-        dispatch(setProductsArray([...productsArray, product]))
-        dispatch(setCopyProductsArray(product))
+        if (type === purchase) {
+            dispatch(setProductsArray([...productsPurchaseArray, product]))
+            dispatch(setCopyProductsArray(product))
+        }
+        else if (type === promo) {
+            dispatch(setProductsPromoArray([...productsPromoArray, product]))
+            dispatch(setCopyProductsPromoArray([...productsPromoArray, product]))
+            dispatch(setIdProducts([...idProducts, product._id]))
+        }
     }
 
     return (

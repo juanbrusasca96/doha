@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     productsArray: [],
-    copyProductsArray: []
+    copyProductsArray: [],
+    idProducts: []
 }
 
 const promoSlice = createSlice({
@@ -21,6 +22,12 @@ const promoSlice = createSlice({
                 copyProductsArray: action.payload
             }
         },
+        setIdProductsAction: (state, action) => {
+            return {
+                ...state,
+                idProducts: action.payload
+            }
+        },
         clearAction: () => {
             return {
                 ...initialState
@@ -29,5 +36,5 @@ const promoSlice = createSlice({
     }
 })
 
-export const { setProductsArrayAction, setCopyProductsArrayAction, clearAction } = promoSlice.actions;
+export const { setProductsArrayAction, setCopyProductsArrayAction, clearAction, setIdProductsAction } = promoSlice.actions;
 export default promoSlice.reducer;

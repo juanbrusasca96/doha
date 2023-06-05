@@ -3,6 +3,7 @@ export const Promo = 'Promo'
 export const home = 'home'
 export const purchase = 'purchase'
 export const table = 'table'
+export const promo = 'promo'
 
 export const categories = ['Vino', 'Espumante', 'Aperitivo', 'Cerveza', 'Gaseosa', 'Jugo', 'Energizante', 'Vodka', 'Ron', 'Gin', 'Licor', 'Whiskey', 'Tequila', Promo, 'Consumo en el local'];
 

@@ -7,13 +7,15 @@ import { categories, colors, purchase, sortOptions } from '../../utils/utils.js'
 import ProductsList from '../productsList/ProductsList'
 import ProductsListPurchase from '../productsListPurchase/ProductsListPurchase'
 import BasicSelect from '../select/BasicSelect'
+import ProductsListPromo from '../productsListPromo/ProductsListPromo'
 
 const colorsOptions = ['Todos', ...colors.slice(1)];
 
 export default function ProductsContainer({ productsList, type, date, setDate }) {
     const dispatch = useDispatch();
     const productsPurchaseArray = useSelector((state) => state.purchases.productsArray)
-    const products = useSelector((state) => state.products[productsList]).filter((product) => !productsPurchaseArray.find(prod => prod._id === product._id));
+    const productsPromoArray = useSelector((state) => state.promos.productsArray)
+    const products = useSelector((state) => state.products[productsList]).filter((product) => !productsPurchaseArray.find(prod => prod._id === product._id) && !productsPromoArray.find(prod => prod._id === product._id));
     const [sort, setSort] = useState(sortOptions[0]);
     const [color, setColor] = useState(colorsOptions[0]);
     const [options, setOptions] = useState({
@@ -55,13 +57,16 @@ export default function ProductsContainer({ productsList, type, date, setDate })
 
     return (
         <Grid sx={{ padding: '1%' }} className='productContainer'>
-            <Grid container sx={{ gap: '2%' }}>
+            <Grid container sx={{ gap: '2%', marginBottom:'2%' }}>
                 <BasicSelect list={sortOptions} value={sort} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='sort' label='Ordenar por' />
                 <BasicSelect list={colorsOptions} value={color} handleChangeValue={(e) => handleChangeOptions(e)} className='select' name='color' label='Filtrar por color' />
                 {type === purchase ? <Calendar onChange={setDate} value={date} /> : ''}
             </Grid>
             {
                 productsPurchaseArray.length > 0 && <ProductsListPurchase products={productsPurchaseArray} className='added' />
+            }
+            {
+                productsPromoArray.length > 0 && <ProductsListPromo products={productsPromoArray} />
             }
             {
                 categories.map((cat, i) => (productsCategories.includes(cat) && <Grid><h1>{cat}</h1> <ProductsList key={i} products={products} category={cat} type={type} /></Grid>))
